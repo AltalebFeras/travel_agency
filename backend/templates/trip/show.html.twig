@@ -51,8 +51,8 @@
                 <tr>
 					<th>Destination</th>
 					<td>
-						{% for trips in trip %}
-							<a href=" {{ path('app_destination_show', {id: destination.id}) }} ">{{ trip.destination_id}}</a>
+						{% for Destination in trip.Destination %}
+							<a href=" {{ path('app_destination_show', {id: destination.id}) }} ">{{destination.country}}</a>
 						{% endfor %}
 					</td>
 				</tr>

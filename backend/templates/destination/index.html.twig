@@ -11,7 +11,6 @@
                 <th>Id</th>
                 <th>Country</th>
                 <th>City</th>
-                <th>Image</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -21,7 +20,6 @@
                 <td>{{ destination.id }}</td>
                 <td>{{ destination.country }}</td>
                 <td>{{ destination.city }}</td>
-                <td>{{ destination.image }}</td>
                 <td>
                     <a href="{{ path('app_destination_show', {'id': destination.id}) }}">show</a>
                     <a href="{{ path('app_destination_edit', {'id': destination.id}) }}">edit</a>
