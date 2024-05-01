@@ -14,7 +14,7 @@
                 <th>ComingBack</th>
                 <th>Description</th>
                 <th>Price</th>
-                <th>Destination</th>
+                {# <th>Destination</th> #}
                 <th>actions</th>
             </tr>
         </thead>
@@ -27,7 +27,6 @@
                 <td>{{ trip.comingBack ? trip.comingBack|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ trip.description }}</td>
                 <td>{{ trip.price }} €</td>
-                {# <td>{{ trip.getDestination().name }}</td> #}
 
                 <td>
                     <a class="btn btn-info" href="{{ path('app_trip_show', {'id': trip.id}) }}">show</a>
