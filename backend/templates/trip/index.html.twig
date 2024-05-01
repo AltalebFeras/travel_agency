@@ -14,6 +14,7 @@
                 <th>ComingBack</th>
                 <th>Description</th>
                 <th>Price</th>
+                <th>Destination</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -25,19 +26,21 @@
                 <td>{{ trip.departure ? trip.departure|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ trip.comingBack ? trip.comingBack|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ trip.description }}</td>
-                <td>{{ trip.price }}</td>
+                <td>{{ trip.price }} €</td>
+                {# <td>{{ trip.getDestination().name }}</td> #}
+
                 <td>
-                    <a href="{{ path('app_trip_show', {'id': trip.id}) }}">show</a>
-                    <a href="{{ path('app_trip_edit', {'id': trip.id}) }}">edit</a>
+                    <a class="btn btn-info" href="{{ path('app_trip_show', {'id': trip.id}) }}">show</a>
+                    <a class="btn btn-warning" href="{{ path('app_trip_edit', {'id': trip.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">no trip found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_trip_new') }}">Create new</a>
+    <a class="btn btn-primary" href="{{ path('app_trip_new') }}">Create new</a>
 {% endblock %}

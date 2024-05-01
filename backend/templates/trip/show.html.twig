@@ -1,42 +1,62 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Trip{% endblock %}
+{% block title %}{{ trip.name }}{% endblock %}
+
 
 {% block body %}
-    <h1>Trip</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ trip.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ trip.name }}</td>
-            </tr>
-            <tr>
-                <th>Departure</th>
-                <td>{{ trip.departure ? trip.departure|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>ComingBack</th>
-                <td>{{ trip.comingBack ? trip.comingBack|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ trip.description }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ trip.price }}</td>
-            </tr>
-        </tbody>
-    </table>
+	{% for message in app.flashes('success') %}
+		<div class="bg-success">
+			<p>{{ message | join('. <br>') }}</p>
+		</div>
+	{% endfor %}
 
-    <a href="{{ path('app_trip_index') }}">back to list</a>
+		<h1>{{ trip.name }}</h1>
 
-    <a href="{{ path('app_trip_edit', {'id': trip.id}) }}">edit</a>
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>Id</th>
+					<td>{{ trip.id }}</td>
+				</tr>
+				<tr>
+					<th>Name</th>
+					<td>{{ trip.name }}</td>
+				</tr>
+				<tr>
+					<th>Departure</th>
+					<td>{{ trip.departure ? trip.departure|date('Y-m-d H:i:s') : '' }}</td>
+				</tr>
+				<tr>
+					<th>ComingBack</th>
+					<td>{{ trip.comingBack ? trip.comingBack|date('Y-m-d H:i:s') : '' }}</td>
+				</tr>
+				<tr>
+					<th>Description</th>
+					<td>{{ trip.description }}</td>
+				</tr>
+				<tr>
+					<th>Price</th>
+					<td>{{ trip.price }} €</td>
+				</tr>
+				<tr>
+					<th>Category</th>
+					<td>
+						{% for category in trip.category %}
+							<a href=" {{ path('app_category_show', {id: category.id}) }} ">{{ category.name }}</a>
+						{% endfor %}
+					</td>
+				</tr>
 
-    {{ include('trip/_delete_form.html.twig') }}
-{% endblock %}
+                <tr>
+					<th>Destination</th>
+					<td>
+						{% for trips in trip %}
+							<a href=" {{ path('app_destination_show', {id: destination.id}) }} ">{{ trip.destination_id}}</a>
+						{% endfor %}
+					</td>
+				</tr>
+			</tbody>
+		</td>
+	</tr>
+</tbody></table><a class="btn btn-secondary" href="{{ path('app_trip_index') }}">back to list</a><a class="btn btn-warning" href="{{ path('app_trip_edit', {'id': trip.id}) }}">edit</a>{{ include('trip/_delete_form.html.twig') }}{% endblock %}

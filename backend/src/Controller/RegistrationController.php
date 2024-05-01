@@ -8,6 +8,7 @@ use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
@@ -30,6 +31,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->get('plainPassword')->getData() == $form->get('password2')->getData()) {
             // encode the plain password
             $user->setPassword(
                     $userPasswordHasher->hashPassword(
@@ -52,8 +54,13 @@ class RegistrationController extends AbstractController
 
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_login');
         }
+        else {
+            $form->get('plainPassword')->addError(new FormError("Les mots de passe donnés sont différents."));
+            $form->get('password2')->addError(new FormError(""));
+        }
+    }
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form,

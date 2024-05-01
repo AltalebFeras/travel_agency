@@ -26,14 +26,15 @@ class TripType extends AbstractType
             ->add('price')
             ->add('Category', EntityType::class, [
                 'class' => Category::class,
-'choice_label' => 'id',
-'multiple' => true,
+                'choice_label' => 'name',
+                'multiple' => true,
             ])
             ->add('Destination', EntityType::class, [
                 'class' => Destination::class,
-'choice_label' => 'id',
-            ])
-        ;
+                'choice_label' => function ($destination) {
+                    return 'To ' . $destination->getCity() . ' city in ' . $destination->getCountry()  ;
+                },
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

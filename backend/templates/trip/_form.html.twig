@@ -1,4 +1,10 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_widget(form) }}
+
+<div>
+	<a class="btn btn-warning" href="{{ path('app_category_new') }}">Create new category</a>
+	<a class="btn btn-warning" href="{{ path('app_destination_new') }}">Create new destination</a>
+</div>
+<button class="btn btn-success my-3  px-5">{{ button_label|default('Save') }}</button>
+
 {{ form_end(form) }}
