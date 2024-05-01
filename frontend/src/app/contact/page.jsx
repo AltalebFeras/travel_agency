@@ -1,6 +1,14 @@
+import Navbar from "../conponant/Navbar";
+
 export default function Contact() {
+
+
     return (
-      <h1>Hello from contact</h1>
+        <>
+    
+      <Navbar />
+        <h1>Hello from Contact</h1>
+      </>
     );
   }
   
