@@ -1,17 +1,35 @@
-<header class="d-flex justify-content-between m-3 align-items-center">
-    <div class="fs-4">
-        <a href="/trips"><img src="https://i.ibb.co/y4X7N74/logo.png" alt="logo" border="0"></a>
+<header class="navbar navbar-expand-lg navbar-light  justify-content-between m-3 align-items-center">
+    <div class="fs-4 d-flex align-items-center">
+        <a class="navbar-brand" href="/trips"><img src="https://i.ibb.co/y4X7N74/logo.png" alt="logo" border="0"></a>
     </div>
 
-    <div class="fs-4">
-        {% if app.user %}
-            <a class="btn btn-secondary" href="/trips">trips</a>
-            <a class="btn btn-secondary" href="/destinations">destination</a>
-            <a class="btn btn-secondary" href="/reservations">reservation</a>
-            <a class="btn btn-secondary" href="/contacts">contact</a>
-            <a class="btn btn-warning" href="/logout">Logout</a>
-        {% else %}
-            <a class="btn btn-secondary" href="/login">Log in</a>
-        {% endif %}
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse fs-4 justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav mb-2 mb-lg-0">
+            {% if app.user %}
+                <li class="nav-item">
+                    <a class="nav-link btn btn-success" href="/trips">Trips</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary" href="/destinations">Destinations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-danger" href="/reservations">Reservation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-secondary" href="/contacts">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class=" nav-link btn btn-warning" href="/logout">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link btn btn-secondary" href="/login">Log in</a>
+                </li>
+            {% endif %}
+        </ul>
     </div>
 </header>

@@ -7,16 +7,13 @@
 
 {% block body %}
 
-	
+
 	<h1>{{ trip.name }}
 		information</h1>
 
 	<table class="table">
 		<tbody>
-			<tr>
-				<th>Id</th>
-				<td>{{ trip.id }}</td>
-			</tr>
+
 			<tr>
 				<th>Name</th>
 				<td>{{ trip.name }}</td>
@@ -49,11 +46,7 @@
 
 			<tr>
 				<th>Destination</th>
-				<td>
-					{% for Destination in trip.Destination %}
-						<a href=" {{ path('app_destination_show', {id: destination.id}) }} ">{{destination.country}}</a>
-					{% endfor %}
-				</td>
+				<td>{{ trip.Destination.country ~ " / " ~ trip.destination.city}}</td>
 			</tr>
 		</tbody>
 	</td>
