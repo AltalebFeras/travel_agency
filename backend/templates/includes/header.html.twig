@@ -1,11 +1,17 @@
 <header class="d-flex justify-content-between m-3 align-items-center">
-	<div class="fs-4">
-	<a href="/home"><img src="https://i.ibb.co/y4X7N74/logo.png" alt="logo" border="0"></a>
-	</div>
+    <div class="fs-4">
+        <a href="/trips"><img src="https://i.ibb.co/y4X7N74/logo.png" alt="logo" border="0"></a>
+    </div>
 
-	<div class="fs-4">
-	<a class="btn btn-secondary" href="/register">Registration</a>
-	<a class="btn btn-secondary" href="/login">Log in</a>
-	</div>
-
+    <div class="fs-4">
+        {% if app.user %}
+            <a class="btn btn-secondary" href="/trips">trips</a>
+            <a class="btn btn-secondary" href="/destinations">destination</a>
+            <a class="btn btn-secondary" href="/reservations">reservation</a>
+            <a class="btn btn-secondary" href="/contacts">contact</a>
+            <a class="btn btn-warning" href="/logout">Logout</a>
+        {% else %}
+            <a class="btn btn-secondary" href="/login">Log in</a>
+        {% endif %}
+    </div>
 </header>
