@@ -21,8 +21,8 @@
                 <td>{{ destination.country }}</td>
                 <td>{{ destination.city }}</td>
                 <td>
-                    <a href="{{ path('app_destination_show', {'id': destination.id}) }}">show</a>
-                    <a href="{{ path('app_destination_edit', {'id': destination.id}) }}">edit</a>
+                    <a class="btn btn-info" href="{{ path('app_destination_show', {'id': destination.id}) }}">show</a>
+                    <a class="btn btn-warning" href="{{ path('app_destination_edit', {'id': destination.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

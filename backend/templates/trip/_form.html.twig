@@ -3,8 +3,8 @@
 
 <div>
 	<a class="btn btn-warning" href="{{ path('app_category_new') }}">Create new category</a>
-	<a class="btn btn-warning" href="{{ path('app_destination_new') }}">Create new destination</a>
 </div>
+<a class="btn btn-secondary" href="{{ path('app_trip_index') }}">back to list</a>
 <button class="btn btn-success my-3  px-5">{{ button_label|default('Save') }}</button>
 
 {{ form_end(form) }}

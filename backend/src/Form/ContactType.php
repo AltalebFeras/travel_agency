@@ -20,7 +20,7 @@ class ContactType extends AbstractType
             ->add('message')
             ->add('Status', EntityType::class, [
                 'class' => Status::class,
-'choice_label' => 'id',
+'choice_label' => 'name',
             ])
         ;
     }

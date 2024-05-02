@@ -24,25 +24,25 @@ class ReservationController extends AbstractController
         ]);
     }
 
-    // #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    // public function new(Request $request, EntityManagerInterface $entityManager): Response
-    // {
-    //     $reservation = new Reservation();
-    //     $form = $this->createForm(ReservationType::class, $reservation);
-    //     $form->handleRequest($request);
+    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $reservation = new Reservation();
+        $form = $this->createForm(ReservationType::class, $reservation);
+        $form->handleRequest($request);
 
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $entityManager->persist($reservation);
-    //         $entityManager->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($reservation);
+            $entityManager->flush();
 
-    //         return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
-    //     }
+            return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
+        }
 
-    //     return $this->render('reservation/new.html.twig', [
-    //         'reservation' => $reservation,
-    //         'form' => $form,
-    //     ]);
-    // }
+        return $this->render('reservation/new.html.twig', [
+            'reservation' => $reservation,
+            'form' => $form,
+        ]);
+    }
 
     #[Route('/{id}', name: 'show', methods: ['GET'])]
     public function show(Reservation $reservation): Response

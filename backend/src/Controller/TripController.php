@@ -34,7 +34,7 @@ class TripController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($trip);
             $entityManager->flush();
-
+            $this->addFlash('success', 'The trip has been added successfully');
             return $this->redirectToRoute('app_trip_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -60,7 +60,7 @@ class TripController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-
+            $this->addFlash('success', 'The trip has been edited successfully');
             return $this->redirectToRoute('app_trip_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -76,6 +76,8 @@ class TripController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$trip->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($trip);
             $entityManager->flush();
+            $this->addFlash('success', 'The trip has been deleted successfully');
+
         }
 
         return $this->redirectToRoute('app_trip_index', [], Response::HTTP_SEE_OTHER);

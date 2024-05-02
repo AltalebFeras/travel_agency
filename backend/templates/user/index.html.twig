@@ -1,45 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block title %}Users
+{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
+	<h1>All users</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>Telephone</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Password</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.firstName }}</td>
-                <td>{{ user.lastName }}</td>
-                <td>{{ user.telephone }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>********</td>
-                <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	{% for message in app.flashes('success') %}
+		<div class="bg-success my-3">
+			{{ message | join('. <br>') }}
+		</div>
+	{% endfor %}
 
-    <a href="{{ path('app_user_new') }}">Create new</a>
+	<table class="table ">
+		<thead>
+			<tr>
+				<th>FirstName</th>
+				<th>LastName</th>
+				<th>Telephone</th>
+				<th>Email</th>
+				<th>Role</th>
+				<th>Password</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in users %}
+				<tr>
+					<td>{{ user.firstName }}</td>
+					<td>{{ user.lastName }}</td>
+					<td>{{ user.telephone }}</td>
+					<td>{{ user.email }}</td>
+					<td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+					<td>********</td>
+					<td class="d-flex  align-items-center gap-3">
+						<a class="btn btn-info" href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+						<a class="btn btn-warning" href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+						{% include 'user/_delete_form.html.twig' %}
+
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="9">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a class="btn btn-primary" href="{{ path('app_user_new') }}">Create new</a>
 {% endblock %}
