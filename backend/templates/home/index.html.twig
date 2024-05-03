@@ -1,7 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}404 Not Found{% endblock %}
 
 {% block body %}
-
+    <div class="container">
+        <div class="text-center mt-5">
+            <h1 class="display-1 text-danger">404</h1>
+            <h2 class="display-4">Page Not Found</h2>
+            <p class="lead">Sorry, the page you are looking for could not be found.</p>
+            <a href="/login" class="btn btn-primary btn-lg">Log in</a>
+        </div>
+    </div>
 {% endblock %}

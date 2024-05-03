@@ -15,7 +15,6 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Id</th>
 				<th>Name</th>
 				<th>Departure</th>
 				<th>ComingBack</th>
@@ -28,7 +27,6 @@
 		<tbody>
 			{% for trip in trips %}
 				<tr>
-					<td>{{ trip.id }}</td>
 					<td>{{ trip.name }}</td>
 					<td>{{ trip.departure ? trip.departure|date('Y-m-d H:i:s') : '' }}</td>
 					<td>{{ trip.comingBack ? trip.comingBack|date('Y-m-d H:i:s') : '' }}</td>

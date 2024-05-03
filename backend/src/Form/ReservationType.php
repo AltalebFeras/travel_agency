@@ -7,6 +7,7 @@ use App\Entity\Status;
 use App\Entity\Trip;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -21,14 +22,19 @@ class ReservationType extends AbstractType
             ->add('email')
             ->add('trip', EntityType::class, [
                 'class' => Trip::class,
-'choice_label' => 'id',
+                'choice_label' => 'name',
             ])
             ->add('Status', EntityType::class, [
                 'class' => Status::class,
-'choice_label' => 'name',
+                'choice_label' => 'name',
             ])
-        ;
+            // ->add('comment', TextareaType::class, [
+            //     'required' => false,
+            // ])
+            ;
     }
+
+
 
     public function configureOptions(OptionsResolver $resolver): void
     {
