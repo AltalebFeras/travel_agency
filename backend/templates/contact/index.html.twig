@@ -9,7 +9,6 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Id</th>
 				<th>FirstName</th>
 				<th>LastName</th>
 				<th>Email</th>
@@ -21,16 +20,17 @@
 		<tbody>
 			{% for contact in contacts %}
 				<tr>
-					<td>{{ contact.id }}</td>
 					<td>{{ contact.firstName }}</td>
 					<td>{{ contact.lastName }}</td>
 					<td>{{ contact.email }}</td>
 					<td>{{ contact.message }}</td>
 					<td>{{ contact.status.name }}</td>
+					<td class="d-flex  align-items-center gap-3">
 
-					<td>
-						<a href="{{ path('app_contact_show', {'id': contact.id}) }}">show</a>
-						<a href="{{ path('app_contact_edit', {'id': contact.id}) }}">edit</a>
+						<a class="btn btn-info" href="{{ path('app_contact_show', {'id': contact.id}) }}">show</a>
+						<a class="btn btn-warning" href="{{ path('app_contact_edit', {'id': contact.id}) }}">edit</a>
+						{{ include('contact/_delete_form.html.twig') }}
+
 					</td>
 				</tr>
 			{% else %}
@@ -41,5 +41,5 @@
 		</tbody>
 	</table>
 
-	<a href="{{ path('app_contact_new') }}">Create new</a>
+	<a class="btn btn-primary" href="{{ path('app_contact_new') }}">Create new</a>
 {% endblock %}

@@ -7,37 +7,55 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TripRepository::class)]
+
 class Trip
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('api_trip_index')]
+
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('api_trip_index' , 'api_trip_show')]
+
     private ?string $name = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups('api_trip_index')]
+
     private ?\DateTimeInterface $departure = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups('api_trip_index')]
+
     private ?\DateTimeInterface $comingBack = null;
 
     #[ORM\Column(length: 555)]
+    #[Groups('api_trip_index')]
+
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Groups('api_trip_index')]
+
     private ?int $price = null;
 
     /**
      * @var Collection<int, Category>
      */
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'trip_category')]
+    #[Groups('api_trip_index')]
+
     private Collection $Category;
 
     #[ORM\ManyToOne(inversedBy: 'trips')]
+    #[Groups('api_trip_index')]
+
     private ?Destination $Destination = null;
 
     /**

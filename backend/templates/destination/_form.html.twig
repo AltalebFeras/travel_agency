@@ -1,9 +1,9 @@
 {{ form_start(form) }}
 {{ form_widget(form) }}
 
-<div>
-	<a class="btn btn-warning" href="{{ path('app_trip_new') }}">Back to create a trip</a>
-</div>
+
+<a class="btn btn-secondary" href="{{ path('app_destination_index') }}">back to list</a>
+
 <button class="btn btn-success my-3  px-5">{{ button_label|default('Save') }}</button>
 
 {{ form_end(form) }}

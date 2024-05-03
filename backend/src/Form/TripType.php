@@ -32,18 +32,8 @@ class TripType extends AbstractType
                     ])
                 ]
             ])
-            ->add('departure', DateTimeType::class, [
-                'widget' => 'single_text',
-                'constraints' => [
-                    new DateTime(['format' => 'Y-m-d H:i:s'])
-                ]
-            ])
-            ->add('comingBack', DateTimeType::class, [
-                'widget' => 'single_text',
-                'constraints' => [
-                    new DateTime(['format' => 'Y-m-d H:i:s'])
-                ]
-            ])
+            ->add('departure')
+            ->add('comingBack')
             ->add('description', TextareaType::class, [
                 'constraints' => [
                     new NotBlank(['message' => 'Please enter a description for the trip']),

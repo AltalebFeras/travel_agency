@@ -1,4 +1,6 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
+    <a class="btn btn-secondary" href="{{ path('app_reservation_index') }}">back to list</a>
+
     <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

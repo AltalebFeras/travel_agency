@@ -34,7 +34,7 @@ class DestinationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($destination);
             $entityManager->flush();
-
+            $this->addFlash('success', 'The destination has been added successfully');
             return $this->redirectToRoute('app_destination_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -60,7 +60,7 @@ class DestinationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-
+            $this->addFlash('success', 'The destination has been edited successfully');
             return $this->redirectToRoute('app_destination_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -76,6 +76,8 @@ class DestinationController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$destination->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($destination);
             $entityManager->flush();
+            $this->addFlash('success', 'The destination has been deleted successfully');
+
         }
 
         return $this->redirectToRoute('app_destination_index', [], Response::HTTP_SEE_OTHER);
