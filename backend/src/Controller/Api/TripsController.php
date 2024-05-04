@@ -14,14 +14,14 @@ use Symfony\Component\Routing\Attribute\Route;
 class TripsController extends AbstractController
 {
    
-    #[Route('s', name: 'index')]
-    public function index(TripRepository $tripRepository): JsonResponse
+    #[Route('s', name: 'index', methods: ['GET'])]
+    public function index(TripRepository $tripRepository): Response
     {
         $trips = $tripRepository->findAll();
         return $this->json($trips, context: ['groups' => 'api_trip_index']);
     }
-    #[Route('/{id}', name: 'show')]
-    public function show(Trip $trip): JsonResponse
+    #[Route('/{id}', name: 'show', methods: ['GET'])]
+    public function show(Trip $trip): Response
     {
         return $this->json($trip, context: ['groups' => ['api_trip_index', 'api_trip_show']]);
     }

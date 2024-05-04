@@ -9,29 +9,24 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: DestinationRepository::class)]
-
 class Destination
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups('api_trip_index')]
-
+    #[Groups(['api_destination_index', 'api_destination_show'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups('api_trip_index')]
-
+    #[Groups(['api_trip_index', 'api_trip_show', 'api_destination_index', 'api_destination_show'])]
     private ?string $country = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups('api_trip_index')]
-
+    #[Groups(['api_trip_index', 'api_trip_show', 'api_destination_index', 'api_destination_show'])]
     private ?string $city = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups('api_trip_index')]
-
+    #[Groups(['api_trip_index', 'api_trip_show', 'api_destination_index', 'api_destination_show'])]
     private ?string $image = null;
 
     /**

@@ -1,5 +1,5 @@
 <?php
-
+// Category.php
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
@@ -14,16 +14,15 @@ class Category
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['api_category_index', 'api_category_show'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups('api_trip_index')]
-
+    #[Groups(['api_trip_index', 'api_trip_show', 'api_category_index', 'api_category_show'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 555)]
-    #[Groups('api_trip_index')]
-
+    #[Groups(['api_trip_index', 'api_trip_show', 'api_category_index', 'api_category_show'])]
     private ?string $description = null;
 
     /**

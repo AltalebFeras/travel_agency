@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ReservationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
@@ -14,22 +15,28 @@ class Reservation
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('api_reservation_new')]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('api_reservation_new')]
     private ?string $lastName = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('api_reservation_new')]
     private ?string $telephone = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('api_reservation_new')]
     private ?string $email = null;
 
-    #[ORM\ManyToOne(inversedBy: 'Reservation')]
+    #[ORM\ManyToOne(inversedBy: 'reservations', cascade: ["persist"])]
+    #[Groups('api_reservation_new')]
     private ?Trip $trip = null;
 
-    #[ORM\ManyToOne(inversedBy: 'reservations')]
-    private ?Status $Status = null;
+    #[ORM\ManyToOne(inversedBy: 'reservations', cascade: ["persist"])]
+    #[Groups('api_reservation_new')]
+    private ?Status $status = null;
 
     public function getId(): ?int
     {
@@ -41,10 +48,9 @@ class Reservation
         return $this->firstName;
     }
 
-    public function setFirstName(string $firstName): static
+    public function setFirstName(string $firstName): self
     {
         $this->firstName = $firstName;
-
         return $this;
     }
 
@@ -53,10 +59,9 @@ class Reservation
         return $this->lastName;
     }
 
-    public function setLastName(string $lastName): static
+    public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
-
         return $this;
     }
 
@@ -65,10 +70,9 @@ class Reservation
         return $this->telephone;
     }
 
-    public function setTelephone(string $telephone): static
+    public function setTelephone(string $telephone): self
     {
         $this->telephone = $telephone;
-
         return $this;
     }
 
@@ -77,10 +81,9 @@ class Reservation
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(string $email): self
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -89,22 +92,20 @@ class Reservation
         return $this->trip;
     }
 
-    public function setTrip(?Trip $trip): static
+    public function setTrip(?Trip $trip): self
     {
         $this->trip = $trip;
-
         return $this;
     }
 
     public function getStatus(): ?Status
     {
-        return $this->Status;
+        return $this->status;
     }
 
-    public function setStatus(?Status $Status): static
+    public function setStatus(?Status $status): self
     {
-        $this->Status = $Status;
-
+        $this->status = $status;
         return $this;
     }
 }

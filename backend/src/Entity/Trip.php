@@ -21,7 +21,7 @@ class Trip
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups('api_trip_index' , 'api_trip_show')]
+    #[Groups('api_trip_index' , 'api_trip_show' , 'api_category_index','api_category_show','api_destination_index','api_destination_show')]
 
     private ?string $name = null;
 
@@ -62,6 +62,7 @@ class Trip
      * @var Collection<int, Reservation>
      */
     #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'trip')]
+    
     private Collection $Reservation;
 
     public function __construct()
