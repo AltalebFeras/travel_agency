@@ -8,10 +8,14 @@
 
 	{% for message in app.flashes('success') %}
 		<div class="bg-success my-3">
-			{{ message | join('. <br>') }}
+			<h4>{{ message | join('. <br>') }}</h4>
 		</div>
 	{% endfor %}
-
+{% for message in app.flashes('error') %}
+		<div class="bg-danger my-3">
+			<h4>{{ message | join('. <br>') }}</h4>
+		</div>
+	{% endfor %}
 	<table class="table">
 		<thead>
 			<tr>
