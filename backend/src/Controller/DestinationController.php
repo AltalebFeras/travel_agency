@@ -34,7 +34,7 @@ class DestinationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($destination);
             $entityManager->flush();
-            $this->addFlash('success', 'The destination has been added successfully');
+            $this->addFlash('successD', 'The destination has been added successfully');
             return $this->redirectToRoute('app_destination_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -60,7 +60,7 @@ class DestinationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-            $this->addFlash('success', 'The destination has been edited successfully');
+            $this->addFlash('successD', 'The destination has been edited successfully');
             return $this->redirectToRoute('app_destination_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -71,15 +71,24 @@ class DestinationController extends AbstractController
     }
 
     #[Route('/{id}', name: 'delete', methods: ['POST'])]
-    public function delete(Request $request, Destination $destination, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$destination->getId(), $request->getPayload()->get('_token'))) {
+    #[Route('/{id}', name: 'delete', methods: ['POST'])]
+public function delete(Request $request, Destination $destination, EntityManagerInterface $entityManager): Response
+{
+    $submittedToken = $request->request->get('_token');
+
+    if ($this->isCsrfTokenValid('delete'.$destination->getId(), $submittedToken)) {
+        try {
             $entityManager->remove($destination);
             $entityManager->flush();
-            $this->addFlash('success', 'The destination has been deleted successfully');
-
+            $this->addFlash('successD', 'The destination has been deleted successfully');
+        } catch (\Exception $e) {
+            $this->addFlash('errorD', 'Unable to delete the destination. It is associated with a valid trip.');
         }
-
-        return $this->redirectToRoute('app_destination_index', [], Response::HTTP_SEE_OTHER);
+    } else {
+        $this->addFlash('errorD', 'Invalid CSRF token.');
     }
+
+    return $this->redirectToRoute('app_destination_index');
+}
+
 }

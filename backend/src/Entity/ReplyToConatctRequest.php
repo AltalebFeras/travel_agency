@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ReplyRepository;
+use App\Repository\ReplyToConatctRequestRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ReplyRepository::class)]
-class Reply
+#[ORM\Entity(repositoryClass: ReplyToConatctRequestRepository::class)]
+class ReplyToConatctRequest
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -16,10 +16,8 @@ class Reply
     #[ORM\Column(length: 999, nullable: true)]
     private ?string $content = null;
 
-    #[ORM\ManyToOne(inversedBy: 'replies')]
-    private ?Reservation $Reservation = null;
-
-  
+    #[ORM\ManyToOne(inversedBy: 'replyToConatctRequests')]
+    private ?Contact $Contact = null;
 
     public function getId(): ?int
     {
@@ -38,17 +36,15 @@ class Reply
         return $this;
     }
 
-    public function getReservation(): ?Reservation
+    public function getContact(): ?Contact
     {
-        return $this->Reservation;
+        return $this->Contact;
     }
 
-    public function setReservation(?Reservation $Reservation): static
+    public function setContact(?Contact $Contact): static
     {
-        $this->Reservation = $Reservation;
+        $this->Contact = $Contact;
 
         return $this;
     }
-
-   
 }

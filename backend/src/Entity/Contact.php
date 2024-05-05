@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ContactRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -44,6 +46,18 @@ class Contact
 
     private ?Status $status = null;
 
+    /**
+     * @var Collection<int, ReplyToConatctRequest>
+     */
+    #[ORM\OneToMany(targetEntity: ReplyToConatctRequest::class, mappedBy: 'Contact')]
+    private Collection $replyToConatctRequests;
+
+    public function __construct()
+    {
+        $this->replyToConatctRequests = new ArrayCollection();
+    }
+
+  
     public function getId(): ?int
     {
         return $this->id;
@@ -103,4 +117,36 @@ class Contact
         $this->status = $status;
         return $this;
     }
+
+    /**
+     * @return Collection<int, ReplyToConatctRequest>
+     */
+    public function getReplyToConatctRequests(): Collection
+    {
+        return $this->replyToConatctRequests;
+    }
+
+    public function addReplyToConatctRequest(ReplyToConatctRequest $replyToConatctRequest): static
+    {
+        if (!$this->replyToConatctRequests->contains($replyToConatctRequest)) {
+            $this->replyToConatctRequests->add($replyToConatctRequest);
+            $replyToConatctRequest->setContact($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReplyToConatctRequest(ReplyToConatctRequest $replyToConatctRequest): static
+    {
+        if ($this->replyToConatctRequests->removeElement($replyToConatctRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($replyToConatctRequest->getContact() === $this) {
+                $replyToConatctRequest->setContact(null);
+            }
+        }
+
+        return $this;
+    }
+
+ 
 }

@@ -10,9 +10,9 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Reservation refernce</th>
+				<th>Reservation reference</th>
 				<th>Client email</th>
-				<th>Content</th>
+				<th>Reply content</th>
 				<th>actions</th>
 			</tr>
 		</thead>
@@ -32,12 +32,12 @@
 				</tr>
 			{% else %}
 				<tr>
-					<td colspan="3">no records found</td>
+					<td colspan="3">no reply found</td>
 				</tr>
 			{% endfor %}
 		</tbody>
 	</table>
 
-	<a class="btn btn-primary" href="{{ path('app_reply_new') }}">Reply to 
+	<a class="btn btn-primary" href="{{ path('app_reply_new') }}">Reply to reservation
 	</a>
 {% endblock %}
