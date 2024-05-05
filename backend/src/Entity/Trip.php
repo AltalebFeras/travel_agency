@@ -65,6 +65,9 @@ class Trip
     
     private Collection $Reservation;
 
+    #[ORM\ManyToOne(inversedBy: 'trips')]
+    private ?User $User = null;
+
     public function __construct()
     {
         $this->Category = new ArrayCollection();
@@ -199,6 +202,18 @@ class Trip
                 $reservation->setTrip(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(?User $User): static
+    {
+        $this->User = $User;
 
         return $this;
     }

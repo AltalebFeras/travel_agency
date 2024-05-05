@@ -13,10 +13,11 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[IsGranted("ROLE_ADMIN")]
-#[Route('/status')]
+#[Route('status', name: 'app_status_')]
+
 class StatusController extends AbstractController
 {
-    #[Route('/', name: 'app_status_index', methods: ['GET'])]
+    #[Route('', name: 'index', methods: ['GET'])]
     public function index(StatusRepository $statusRepository): Response
     {
         return $this->render('status/index.html.twig', [
@@ -24,7 +25,7 @@ class StatusController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_status_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $status = new Status();
@@ -45,7 +46,7 @@ class StatusController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_status_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'show', methods: ['GET'])]
     public function show(Status $status): Response
     {
         return $this->render('status/show.html.twig', [
@@ -53,7 +54,8 @@ class StatusController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_status_edit', methods: ['GET', 'POST'])]
+
+    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Status $status, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(StatusType::class, $status);
@@ -72,12 +74,12 @@ class StatusController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_status_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, Status $status, EntityManagerInterface $entityManager): Response
     {
         $submittedToken = $request->request->get('_token');
 
-        if ($this->isCsrfTokenValid('delete'.$status->getId(), $submittedToken)) {
+        if ($this->isCsrfTokenValid('delete' . $status->getId(), $submittedToken)) {
             try {
                 $entityManager->remove($status);
                 $entityManager->flush();

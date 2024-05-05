@@ -7,7 +7,6 @@
 
     <table class="table">
         <tbody>
-            
             <tr>
                 <th>Name</th>
                 <td>{{ category.name }}</td>
@@ -16,10 +15,24 @@
                 <th>Description</th>
                 <td>{{ category.description }}</td>
             </tr>
+            <tr>
+                <th>Trips associated</th>
+                <td>
+                    {% if category.tripCategory is not empty %}
+                        <ul>
+                            {% for trip in category.tripCategory %}
+                                <li>
+                                    <a class="fs-4 text-decoration-none" href="{{ path('app_trip_show', {id: trip.id}) }}">{{ trip.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class= "fs-5 text-info ">No trips associated with this category !</p>
+                    {% endif %}
+                </td>
+            </tr>
         </tbody>
     </table>
 
-    <a class="btn btn-secondary" href="{{ path('app_category_index') }}">back to list</a>
-
-
+    <a class="btn btn-secondary" href="{{ path('app_category_index') }}">Back to list</a>
 {% endblock %}

@@ -28,9 +28,7 @@ class ReservationType extends AbstractType
                 'class' => Status::class,
                 'choice_label' => 'name',
             ])
-            // ->add('comment', TextareaType::class, [
-            //     'required' => false,
-            // ])
+          
             ;
     }
 

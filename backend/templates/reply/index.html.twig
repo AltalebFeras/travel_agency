@@ -10,7 +10,7 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Reservation reference</th>
+				<th>Client Name</th>
 				<th>Client email</th>
 				<th>Reply content</th>
 				<th>actions</th>
@@ -19,12 +19,11 @@
 		<tbody>
 			{% for reply in replies %}
 				<tr>
-					<td>{{ reply.reservation.id }}</td>
+					<td>{{ reply.reservation.firstName ~ " "~ reply.reservation.lastName }}</td>
 					<td>{{ reply.reservation.email }}</td>
 					<td>{{ reply.content }}</td>
 					<td class="d-flex  align-items-center gap-3">
 
-						<a class="btn btn-info" href="{{ path('app_reply_show', {'id': reply.id}) }}">show</a>
 						<a class="btn btn-warning" href="{{ path('app_reply_edit', {'id': reply.id}) }}">edit</a>
 						{{ include('reply/_delete_form.html.twig') }}
 

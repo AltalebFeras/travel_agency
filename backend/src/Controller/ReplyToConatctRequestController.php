@@ -64,13 +64,7 @@ class ReplyToConatctRequestController extends AbstractController
     $this->mailer->send($email);
 }
 
-    #[Route('/{id}', name: 'show', methods: ['GET'])]
-    public function show(ReplyToConatctRequest $replyToConatctRequest): Response
-    {
-        return $this->render('reply_to_conatct_request/show.html.twig', [
-            'reply_to_conatct_request' => $replyToConatctRequest,
-        ]);
-    }
+  
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ReplyToConatctRequest $replyToConatctRequest, EntityManagerInterface $entityManager): Response

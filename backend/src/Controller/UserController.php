@@ -45,7 +45,7 @@ class UserController extends AbstractController
                 );
                 $entityManager->persist($user);
                 $entityManager->flush();
-                $this->addFlash('success', 'The user has been added successfully');
+                $this->addFlash('successUser', 'The user has been added successfully');
                 return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
             }
         }
@@ -82,7 +82,7 @@ class UserController extends AbstractController
 
 
                 $entityManager->flush();
-                $this->addFlash('success', 'The user has been edited successfully');
+                $this->addFlash('successUser', 'The user has been edited successfully');
                 return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
             }
         }
@@ -93,16 +93,22 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'delete', methods: ['POST'])]
-    public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}', name: 'delete', methods: ['POST'])]public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->getPayload()->get('_token'))) {
-            $entityManager->remove($user);
-            $entityManager->flush();
-            $this->addFlash('success', 'The user has been deleted successfully');
+        $submittedToken = $request->request->get('_token');
 
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $submittedToken)) {
+            try {
+                $entityManager->remove($user);
+                $entityManager->flush();
+                $this->addFlash('successUser', 'The user has been deleted successfully');
+            } catch (\Exception $e) {
+                $this->addFlash('errorUser', 'Unable to delete this user, because he created a valid trip.');
+            }
+        } else {
+            $this->addFlash('errorUser', 'Invalid CSRF token.');
         }
 
-        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_user_index');
     }
 }

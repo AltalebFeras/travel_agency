@@ -70,13 +70,7 @@ class ReplyController extends AbstractController
         $this->mailer->send($email);
     }
     
-    #[Route('/{id}', name: 'show', methods: ['GET'])]
-    public function show(Reply $reply): Response
-    {
-        return $this->render('reply/show.html.twig', [
-            'reply' => $reply,
-        ]);
-    }
+ 
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Reply $reply, EntityManagerInterface $entityManager): Response

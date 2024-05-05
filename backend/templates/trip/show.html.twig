@@ -4,50 +4,56 @@
 	{{ trip.name }}
 {% endblock %}
 
-
 {% block body %}
-
-
 	<h1>{{ trip.name }}
 		information</h1>
 
 	<table class="table">
 		<tbody>
-
 			<tr>
 				<th>Name</th>
 				<td>{{ trip.name }}</td>
 			</tr>
 			<tr>
-				<th>Departure</th>
+				<th>Departure &#128747;</th>
 				<td>{{ trip.departure ? trip.departure|date('Y-m-d H:i:s') : '' }}</td>
 			</tr>
 			<tr>
-				<th>ComingBack</th>
+				<th>ComingBack &#128748;</th>
 				<td>{{ trip.comingBack ? trip.comingBack|date('Y-m-d H:i:s') : '' }}</td>
 			</tr>
 			<tr>
 				<th>Description</th>
-				<td>{{ trip.description }}</td>
+				<td class="fw-bold">{{ trip.description }}</td>
 			</tr>
 			<tr>
 				<th>Price</th>
-				<td>{{ trip.price }}
+				<td class="fst-italic fw-bold">{{ trip.price }}
 					€</td>
 			</tr>
 			<tr>
-				<th>Category</th>
+				<th>Categories associated</th>
 				<td>
-					{% for category in trip.category %}
-						<a href=" {{ path('app_category_show', {id: category.id}) }} ">{{ category.name }}</a>
-					{% endfor %}
+					{% if trip.category is not empty %}
+						<ul>
+							{% for category in trip.category %}
+								<a class="fs-4 text-decoration-none" href="{{ path('app_category_show', {id: category.id}) }}">{{ category.name }}</a>
+							{% endfor %}
+						</ul>
+					{% else %}
+						<p class="fs-5 text-info ">No category associated with this trip !</p>
+					{% endif %}
 				</td>
 			</tr>
-
 			<tr>
 				<th>Destination</th>
-				<td>{{ trip.Destination.country ~ " / " ~ trip.destination.city}}</td>
+				<td>
+					<a class="fs-4 text-decoration-none" href="{{ path('app_destination_show', {id: trip.destination.id}) }}">{{ trip.destination.country }}
+						/
+						{{ trip.destination.city }}</a>
+				</td>
 			</tr>
 		</tbody>
-	</td>
-</tr></tbody></table><a class="btn btn-secondary" href="{{ path('app_trip_index') }}">back to list</a>{% endblock %}
+	</table>
+	<a class="btn btn-secondary" href="{{ path('app_trip_index') }}">back to list</a>
+{% endblock %}

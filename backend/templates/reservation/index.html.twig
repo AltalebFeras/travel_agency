@@ -23,7 +23,7 @@
 				<tr>
 					<td>{{ reservation.firstName }}</td>
 					<td>{{ reservation.lastName }}</td>
-					<td>{{ reservation.telephone }}</td>
+					<td><a href="tel:{{ reservation.telephone }}">{{ reservation.telephone }}</a></td>
 					<td>{{ reservation.email }}</td>
 					<td>{{ reservation.trip.name }}</td>
 					<td>{{ reservation.status.name }}</td>

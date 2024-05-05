@@ -9,25 +9,20 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-#[IsGranted("ROLE_ADMIN")]
-#[Route('/trip' , name: 'app_trip_')]
+#[Route('/trip', name: 'app_trip_')]
 class TripController extends AbstractController
 {
-    #[Route('s', name: 'index', methods: ['GET'])]
-    public function index(TripRepository $tripRepository): Response
-    {
-        return $this->render('trip/index.html.twig', [
-            'trips' => $tripRepository->findAll(),
-        ]);
-    }
-
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, UserInterface $user): Response
     {
         $trip = new Trip();
+
+        // Set the currently logged-in user as the owner of the trip
+        $trip->setUser($user);
+
         $form = $this->createForm(TripType::class, $trip);
         $form->handleRequest($request);
 
@@ -35,12 +30,20 @@ class TripController extends AbstractController
             $entityManager->persist($trip);
             $entityManager->flush();
             $this->addFlash('success', 'The trip has been added successfully');
-            return $this->redirectToRoute('app_trip_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_trip_index');
         }
 
         return $this->render('trip/new.html.twig', [
             'trip' => $trip,
-            'form' => $form,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('s', name: 'index', methods: ['GET'])]
+    public function index(TripRepository $tripRepository): Response
+    {
+        return $this->render('trip/index.html.twig', [
+            'trips' => $tripRepository->findAll(),
         ]);
     }
 
@@ -61,25 +64,24 @@ class TripController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
             $this->addFlash('success', 'The trip has been edited successfully');
-            return $this->redirectToRoute('app_trip_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_trip_index');
         }
 
         return $this->render('trip/edit.html.twig', [
             'trip' => $trip,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
     #[Route('/{id}', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, Trip $trip, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$trip->getId(), $request->getPayload()->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$trip->getId(), $request->request->get('_token'))) {
             $entityManager->remove($trip);
             $entityManager->flush();
             $this->addFlash('success', 'The trip has been deleted successfully');
-
         }
 
-        return $this->redirectToRoute('app_trip_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_trip_index');
     }
 }

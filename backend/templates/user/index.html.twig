@@ -6,9 +6,14 @@
 {% block body %}
 	<h1>All users</h1>
 
-	{% for message in app.flashes('success') %}
+	{% for message in app.flashes('successUser') %}
 		<div class="bg-success my-3">
-			{{ message | join('. <br>') }}
+			<h4>{{ message | join('. <br>') }}</h4>
+		</div>
+	{% endfor %}
+	{% for message in app.flashes('errorUser') %}
+		<div class="bg-danger my-3">
+			<h4>{{ message | join('. <br>') }}</h4>
 		</div>
 	{% endfor %}
 
