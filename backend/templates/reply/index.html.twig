@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reply
+{% endblock %}
+
+{% block body %}
+	<h1>ALL Replies
+	</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Reservation refernce</th>
+				<th>Client email</th>
+				<th>Content</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for reply in replies %}
+				<tr>
+					<td>{{ reply.reservation.id }}</td>
+					<td>{{ reply.reservation.email }}</td>
+					<td>{{ reply.content }}</td>
+					<td class="d-flex  align-items-center gap-3">
+
+						<a class="btn btn-info" href="{{ path('app_reply_show', {'id': reply.id}) }}">show</a>
+						<a class="btn btn-warning" href="{{ path('app_reply_edit', {'id': reply.id}) }}">edit</a>
+						{{ include('reply/_delete_form.html.twig') }}
+
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="3">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a class="btn btn-primary" href="{{ path('app_reply_new') }}">Reply to 
+	</a>
+{% endblock %}
