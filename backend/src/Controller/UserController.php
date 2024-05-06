@@ -30,8 +30,16 @@ class UserController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher): Response
+    public function new(Request $request,  EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher): Response
     {
+
+        // Check if the logged-in user is an editor and if they are trying to edit their own account
+        if ($this->isGranted('ROLE_EDITOR') && !$this->isGranted('ROLE_ADMIN') ) {
+            $this->addFlash('errorUser', 'You are not allowed to create this user.');
+            return $this->redirectToRoute('app_user_index');
+        }
+       
+
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -69,6 +77,15 @@ class UserController extends AbstractController
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher): Response
     {
+        $currentUser = $this->getUser();
+
+        // Check if the logged-in user is an editor and if they are trying to edit their own account
+        if ($this->isGranted('ROLE_EDITOR') && !$this->isGranted('ROLE_ADMIN') && $currentUser !== $user) {
+            $this->addFlash('errorUser', 'You are not allowed to edit this user.');
+            return $this->redirectToRoute('app_user_index');
+        }
+       
+        
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -105,6 +122,14 @@ class UserController extends AbstractController
         #[Route('/{id}', name: 'delete', methods: ['POST'])]
         public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
         {
+            $currentUser = $this->getUser();
+
+            // Check if the logged-in user is an editor and if they are trying to edit their own account
+            if ($this->isGranted('ROLE_EDITOR') && !$this->isGranted('ROLE_ADMIN') && $currentUser !== $user) {
+                $this->addFlash('errorUser', 'You are not allowed to delete this user.');
+                return $this->redirectToRoute('app_user_index');
+            }
+
             $submittedToken = $request->request->get('_token');
     
             if ($this->isCsrfTokenValid('delete' . $user->getId(), $submittedToken)) {
