@@ -59,10 +59,14 @@
 				<li class="nav-item dropdown">
 					<a class="nav-link  dropdown-toggle btn btn-light" href="" data-bs-toggle="dropdown">Setting</a>
 					<ul class="dropdown-menu">
-						<li>
+						
+						{% if  is_granted  ("ROLE_EDITOR") %}
+							
+							<li>
 							<a class="dropdown-item btn btn-info" href="/users">
 								All users</a>
 						</li>
+						{% endif %}
 						<li>
 							<a class="dropdown-item btn btn-info" href="/status">
 								All status</a>
@@ -75,9 +79,9 @@
 					<a class=" nav-link btn btn-warning" href="/logout">Logout</a>
 				</li>
 				{# {% else %}
-												                <li class="nav-item">
-												                    <a class="nav-link btn btn-secondary" href="/login">Log in</a>
-												                </li> #}
+																				                <li class="nav-item">
+																				                    <a class="nav-link btn btn-secondary" href="/login">Log in</a>
+																				                </li> #}
 			{% endif %}
 		</ul>
 	</div>

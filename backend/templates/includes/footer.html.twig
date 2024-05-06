@@ -1,0 +1,12 @@
+
+
+<P class="d-flex justify-content-center">temporary footer  to display a the user's role : 
+
+		{% if  is_granted  ("ROLE_ADMIN") %}
+			role admin
+		{% endif %} ,
+		{% if  is_granted  ("ROLE_EDITOR") %}
+			role editor
+		{% endif %}
+		
+        </p>

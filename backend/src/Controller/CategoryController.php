@@ -34,7 +34,7 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($category);
             $entityManager->flush();
-            $this->addFlash('success', 'The cartegory has been added successfully');
+            $this->addFlash('successC', 'The cartegory has been added successfully');
 
             return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -61,7 +61,7 @@ class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-            $this->addFlash('success', 'The cartegory has been edited successfully');
+            $this->addFlash('successC', 'The cartegory has been edited successfully');
 
             return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -78,7 +78,7 @@ class CategoryController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($category);
             $entityManager->flush();
-            $this->addFlash('success', 'The cartegory has been deleted successfully');
+            $this->addFlash('successC', 'The cartegory has been deleted successfully');
 
         }
 
