@@ -19,6 +19,17 @@
 			</div>
 		{% endif %}
 
+		{% for message in app.flashes('successUserD') %}
+			<div class="bg-warning my-3">
+				<h4>{{ message | join('. <br>') }}</h4>
+			</div>
+		{% endfor %}
+		{% for message in app.flashes('errorUserD') %}
+			<div class="bg-danger my-3">
+				<h4>{{ message | join('. <br>') }}</h4>
+			</div>
+		{% endfor %}
+
 		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 		<label for="inputEmail">Email</label>
 		<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>

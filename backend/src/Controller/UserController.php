@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 
@@ -92,23 +94,46 @@ class UserController extends AbstractController
             'form' => $form,
         ]);
     }
-
-    #[Route('/{id}', name: 'delete', methods: ['POST'])]public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
-    {
-        $submittedToken = $request->request->get('_token');
-
-        if ($this->isCsrfTokenValid('delete' . $user->getId(), $submittedToken)) {
-            try {
-                $entityManager->remove($user);
-                $entityManager->flush();
-                $this->addFlash('successUser', 'The user has been deleted successfully');
-            } catch (\Exception $e) {
-                $this->addFlash('errorUser', 'Unable to delete this user, because he created a valid trip.');
-            }
-        } else {
-            $this->addFlash('errorUser', 'Invalid CSRF token.');
+    
+        private $tokenStorage;
+    
+        public function __construct(TokenStorageInterface $tokenStorage)
+        {
+            $this->tokenStorage = $tokenStorage;
         }
-
-        return $this->redirectToRoute('app_user_index');
+    
+        #[Route('/{id}', name: 'delete', methods: ['POST'])]
+        public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
+        {
+            $submittedToken = $request->request->get('_token');
+    
+            if ($this->isCsrfTokenValid('delete' . $user->getId(), $submittedToken)) {
+                if ($user === $this->getUser()) {
+                    try {
+                        $entityManager->remove($user);
+                        $entityManager->flush();
+                        $this->tokenStorage->setToken(null);
+                        $request->getSession()->invalidate();
+                        $this->addFlash('successUserD', 'Your account has been deleted successfully.');
+                        return $this->redirectToRoute('app_login');
+                    } catch (\Exception $e) {
+                        $this->addFlash('errorUserD', 'An error occurred while deleting your account.');
+                        return $this->redirectToRoute('app_user_index');
+                    }
+                } else {
+                    try {
+                        $entityManager->remove($user);
+                        $entityManager->flush();
+                        $this->addFlash('successUser', 'The user has been deleted successfully');
+                    } catch (\Exception $e) {
+                        $this->addFlash('errorUser', 'Unable to delete this user, because he created a valid trip.');
+                    }
+                }
+            } else {
+                $this->addFlash('errorUser', 'Invalid CSRF token.');
+            }
+    
+            return $this->redirectToRoute('app_user_index');
+        }
     }
-}
+    
