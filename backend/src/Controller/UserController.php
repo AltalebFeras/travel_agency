@@ -35,7 +35,7 @@ class UserController extends AbstractController
 
         // Check if the logged-in user is an editor and if they are trying to edit their own account
         if ($this->isGranted('ROLE_EDITOR') && !$this->isGranted('ROLE_ADMIN') ) {
-            $this->addFlash('errorUser', 'You are not allowed to create this user.');
+            $this->addFlash('errorUser', 'You are not allowed to create users ONLY ADMINS.');
             return $this->redirectToRoute('app_user_index');
         }
        

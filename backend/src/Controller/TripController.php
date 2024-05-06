@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 
 #[Route('/trip', name: 'app_trip_')]
 class TripController extends AbstractController
@@ -36,7 +38,7 @@ class TripController extends AbstractController
 
         return $this->render('trip/new.html.twig', [
             'trip' => $trip,
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 
@@ -57,32 +59,51 @@ class TripController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Trip $trip, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Trip $trip, EntityManagerInterface $entityManager, UserInterface $user): Response
     {
+        // Check if the user is an editor and not an admin
+        if ($this->isGranted('ROLE_EDITOR') && !$this->isGranted('ROLE_ADMIN')) {
+            // Check if the trip does not belong to the current user
+            if ($trip->getUser() !== $user) {
+                $this->addFlash('error', 'You are not allowed to edit this trip.');
+                return $this->redirectToRoute('app_trip_index');
+            }
+        }
+    
         $form = $this->createForm(TripType::class, $trip);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
             $this->addFlash('success', 'The trip has been edited successfully');
             return $this->redirectToRoute('app_trip_index');
         }
-
+    
         return $this->render('trip/edit.html.twig', [
             'trip' => $trip,
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
-
+    
     #[Route('/{id}', name: 'delete', methods: ['POST'])]
-    public function delete(Request $request, Trip $trip, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Trip $trip, EntityManagerInterface $entityManager, UserInterface $user): Response
     {
+        // Check if the user is an editor and not an admin
+        if ($this->isGranted('ROLE_EDITOR') && !$this->isGranted('ROLE_ADMIN')) {
+            // Check if the trip does not belong to the current user
+            if ($trip->getUser() !== $user) {
+                $this->addFlash('error', 'You are not allowed to delete this trip.');
+                return $this->redirectToRoute('app_trip_index');
+            }
+        }
+    
         if ($this->isCsrfTokenValid('delete'.$trip->getId(), $request->request->get('_token'))) {
             $entityManager->remove($trip);
             $entityManager->flush();
             $this->addFlash('success', 'The trip has been deleted successfully');
         }
-
+    
         return $this->redirectToRoute('app_trip_index');
     }
 }
+    

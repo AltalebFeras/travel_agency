@@ -14,7 +14,7 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[IsGranted("ROLE_ADMIN")]
+// #[IsGranted("ROLE_ADMIN")]
 #[Route('/reply_to_conatct_request', name: 'app_reply_to_conatct_request_')]
 class ReplyToConatctRequestController extends AbstractController
 {

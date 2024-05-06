@@ -3,7 +3,70 @@
 {% block title %}Trips
 {% endblock %}
 
+
 {% block body %}
+	<h1>Trips Created by me</h1>
+
+	{% for message in app.flashes('success') %}
+		<div class="bg-success my-3">
+			<h4>{{ message | join('. <br>') }}</h4>
+		</div>
+	{% endfor %}
+	{% for message in app.flashes('error') %}
+		<div class="bg-danger my-3">
+			<h4>{{ message | join('. <br>') }}</h4>
+		</div>
+	{% endfor %}
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Departure</th>
+				<th>ComingBack</th>
+				<th>Price</th>
+				<th>Destination</th>
+				<th>Category</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for trip in app.user.trips %}
+				<tr>
+					<td>{{ trip.name }}</td>
+					<td>{{ trip.departure ? trip.departure|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ trip.comingBack ? trip.comingBack|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ trip.price }}€</td>
+					<td>
+						<a class=" text-decoration-none" href="{{ path('app_destination_show', {id: trip.destination.id}) }}">{{ trip.destination.country }}
+							/
+							{{ trip.destination.city }}</a>
+					</td>
+					<td>
+					{% if trip.category is not empty %}
+						<ul>
+							{% for category in trip.category %}
+								<a class="fs-5 text-decoration-none" href="{{ path('app_category_show', {id: category.id}) }}">{{category.name}}</a>
+							{% endfor %}
+						</ul>
+					{% else %}
+						<p class="fs-5 text-info ">No category associated with this trip !</p>
+					{% endif %}
+				</td>
+					<td class="d-flex  align-items-center gap-3">
+						<a class="btn btn-info" href="{{ path('app_trip_show', {'id': trip.id}) }}">show</a>
+						<a class="btn btn-warning" href="{{ path('app_trip_edit', {'id': trip.id}) }}">edit</a>
+						{% include 'trip/_delete_form.html.twig' %}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="7">no trip found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+
 	<h1>All trips</h1>
 
 	{% for message in app.flashes('success') %}
@@ -11,7 +74,7 @@
 			<h4>{{ message | join('. <br>') }}</h4>
 		</div>
 	{% endfor %}
-{% for message in app.flashes('error') %}
+	{% for message in app.flashes('error') %}
 		<div class="bg-danger my-3">
 			<h4>{{ message | join('. <br>') }}</h4>
 		</div>
@@ -25,7 +88,7 @@
 				{# <th>Description</th> #}
 				<th>Price</th>
 				<th>Destination</th>
-				<th>Created by</th>
+				<th>Category</th>
 				<th>actions</th>
 			</tr>
 		</thead>
@@ -38,8 +101,22 @@
 					{# <td>{{ trip.description }}</td> #}
 					<td>{{ trip.price }}
 						€</td>
-					<td>{{ trip.destination.country ~ " / " ~ trip.destination.city}}</td>
-					<td>{{ trip.user.Firstname ~ " "~ trip.user.lastName}}</td>
+					<td>
+						<a class=" text-decoration-none" href="{{ path('app_destination_show', {id: trip.destination.id}) }}">{{ trip.destination.country }}
+							/
+							{{ trip.destination.city }}</a>
+					</td>
+					<td>
+						{% if trip.category is not empty %}
+							<ul>
+								{% for category in trip.category %}
+									<a class="fs-5 text-decoration-none" href="{{ path('app_category_show', {id: category.id}) }}">{{category.name}}</a>
+								{% endfor %}
+							</ul>
+						{% else %}
+							<p class="fs-5 text-info ">No category associated with this trip !</p>
+						{% endif %}
+					</td>
 					<td class="d-flex  align-items-center gap-3">
 						<a class="btn btn-info" href="{{ path('app_trip_show', {'id': trip.id}) }}">show</a>
 						<a class="btn btn-warning" href="{{ path('app_trip_edit', {'id': trip.id}) }}">edit</a>
