@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Users
-{% endblock %}
+{% block title %}Users{% endblock %}
 
 {% block body %}
-	<h1>All users</h1>
+
+<h1>My account</h1>
 
 	{% for message in app.flashes('successUser') %}
 		<div class="bg-success my-3">
@@ -17,7 +17,7 @@
 		</div>
 	{% endfor %}
 
-	<table class="table ">
+	<table class="table">
 		<thead>
 			<tr>
 				<th>FirstName</th>
@@ -25,31 +25,76 @@
 				<th>Telephone</th>
 				<th>Email</th>
 				<th>Role</th>
-				<th>actions</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
-			{% for user in users %}
-				<tr>
-					<td>{{ user.firstName }}</td>
-					<td>{{ user.lastName }}</td>
-					<td>{{ user.telephone }}</td>
-					<td>{{ user.email }}</td>
-					<td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-					<td class="d-flex  align-items-center gap-3">
-						<a class="btn btn-info" href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-						<a class="btn btn-warning" href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-						{% include 'user/_delete_form.html.twig' %}
+			<tr>
+				<td>{{ app.user.firstName }}</td>
+				<td>{{ app.user.lastName }}</td>
+				<td>{{ app.user.telephone }}</td>
+				<td>{{ app.user.email }}</td>
+				<td>{{ app.user.roles ? app.user.roles|json_encode : '' }}</td>
+				<td>
+					<a class="btn btn-warning" href="{{ path('app_user_edit', {'id': app.user.id}) }}">Edit</a>
+					{# {% include 'user/_delete_form.html.twig' %} #}
 
-					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="9">no records found</td>
-				</tr>
-			{% endfor %}
+				</td>
+			</tr>
 		</tbody>
 	</table>
 
-	<a class="btn btn-primary" href="{{ path('app_user_new') }}">Create new</a>
+    <h1>All users</h1>
+
+    {% for message in app.flashes('successUser') %}
+        <div class="bg-success my-3">
+            <h4>{{ message | join('. <br>') }}</h4>
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('errorUser') %}
+        <div class="bg-danger my-3">
+            <h4>{{ message | join('. <br>') }}</h4>
+        </div>
+    {% endfor %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Telephone</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.telephone }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                    <td class="d-flex align-items-center gap-3">
+                        {% if 'ROLE_ADMIN' in app.user.roles %}
+                            <a class="btn btn-info" href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+                            <a class="btn btn-warning" href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                            {% include 'user/_delete_form.html.twig' %}
+                        {% elseif 'ROLE_EDITOR' in app.user.roles and 'ROLE_EDITOR' in user.roles and user.id == app.user.id %}
+                            <a class="btn btn-info" href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+                            <a class="btn btn-warning" href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                            {% include 'user/_delete_form.html.twig' %}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no User found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('app_user_new') }}">Create new</a>
 {% endblock %}
