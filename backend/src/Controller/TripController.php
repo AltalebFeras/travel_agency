@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-
+#[IsGranted("ROLE_EDITOR")]
 #[Route('/trip', name: 'app_trip_')]
 class TripController extends AbstractController
 {

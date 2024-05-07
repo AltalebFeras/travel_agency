@@ -14,7 +14,7 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-// #[IsGranted("ROLE_ADMIN")]
+#[IsGranted("ROLE_EDITOR")]
 #[Route('/reply', name: 'app_reply_')]
 class ReplyController extends AbstractController
 {

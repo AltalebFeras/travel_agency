@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 
-// #[IsGranted("ROLE_ADMIN")]
+#[IsGranted("ROLE_EDITOR")]
 #[Route('/user', name: 'app_user_')]
 
 class UserController extends AbstractController

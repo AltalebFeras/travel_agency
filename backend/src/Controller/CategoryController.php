@@ -14,7 +14,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 // #[IsGranted("ROLE_ADMIN" , "ROLE_EDITOR")]
 
-   
+#[IsGranted("ROLE_EDITOR")]
 #[Route('/category' , name: 'app_category_')]
 class CategoryController extends AbstractController
 {

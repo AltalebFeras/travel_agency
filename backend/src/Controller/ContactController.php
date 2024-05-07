@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 
-// #[IsGranted("ROLE_ADMIN")]
+#[IsGranted("ROLE_EDITOR")]
 #[Route('/contact', name: 'app_contact_')]
 class ContactController extends AbstractController
 {
