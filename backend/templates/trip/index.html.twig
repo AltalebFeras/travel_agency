@@ -1,166 +1,175 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Trips{% endblock %}
+{% block title %}Trips
+{% endblock %}
 
 {% block body %}
-    <h1>Trips Created by me</h1>
+	<h1>Trips Created by me</h1>
 
-    {% for message in app.flashes('success') %}
-        <div class="bg-success my-3">
-            <h4>{{ message | join('. <br>') }}</h4>
-        </div>
-    {% endfor %}
-    {% for message in app.flashes('error') %}
-        <div class="bg-danger my-3">
-            <h4>{{ message | join('. <br>') }}</h4>
-        </div>
-    {% endfor %}
-    <table class="table" id="myTripsTable">
-        <!-- Table headers -->
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Departure</th>
-                <th>ComingBack</th>
-                <th>Price</th>
-                <th>Destination</th>
-                <th>Category</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Loop through user's trips -->
-            {% for trip in app.user.trips %}
-                <tr>
-                    <!-- Trip details -->
-                    <td>{{ trip.name }}</td>
-                    <td>{{ trip.departure ? trip.departure|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ trip.comingBack ? trip.comingBack|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ trip.price }}€</td>
-                    <td>
-                        <a class="text-decoration-none" href="{{ path('app_destination_show', {id: trip.destination.id}) }}">{{ trip.destination.country }}/ {{ trip.destination.city }}</a>
-                    </td>
-                    <td>
-                        {% if trip.category is not empty %}
-                            <ul>
-                                {% for category in trip.category %}
-                                    <a class="fs-5 text-decoration-none" href="{{ path('app_category_show', {id: category.id}) }}">{{category.name}}</a>
-                                {% endfor %}
-                            </ul>
-                        {% else %}
-                            <p class="fs-5 text-info">No category associated with this trip!</p>
-                        {% endif %}
-                    </td>
-                    <td class="d-flex align-items-center gap-3">
-                        <a class="btn btn-info" href="{{ path('app_trip_show', {'id': trip.id}) }}">show</a>
-                        <a class="btn btn-warning" href="{{ path('app_trip_edit', {'id': trip.id}) }}">edit</a>
-                        {% include 'trip/_delete_form.html.twig' %}
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="7">No trip found</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+	{% for message in app.flashes('success') %}
+		<div class="bg-success my-3">
+			<h4>{{ message | join('. <br>') }}</h4>
+		</div>
+	{% endfor %}
+	{% for message in app.flashes('error') %}
+		<div class="bg-danger my-3">
+			<h4>{{ message | join('. <br>') }}</h4>
+		</div>
+	{% endfor %}
+	<table
+		class="table" id="myTripsTable">
+		<!-- Table headers -->
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Departure</th>
+				<th>ComingBack</th>
+				<th>Price</th>
+				<th>Destination</th>
+				<th>Category</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- Loop through user's trips -->
+			{% for trip in app.user.trips %}
+				<tr>
+					<!-- Trip details -->
+					<td>{{ trip.name }}</td>
+					<td>{{ trip.departure ? trip.departure|date('d/m/Y \\a\\t H:i') : '' }}</td>
+					<td>{{ trip.comingBack ? trip.comingBack|date('d/m/Y \\a\\t H:i') : '' }}</td>
 
-    <h1>All trips</h1>
+					<td>{{ trip.price }}€</td>
+					<td>
+						<a class="text-decoration-none" href="{{ path('app_destination_show', {id: trip.destination.id}) }}">{{ trip.destination.country }}/
+							{{ trip.destination.city }}</a>
+					</td>
+					<td>
+						{% if trip.category is not empty %}
+							
+								{% for category in trip.category %}
+									<a class="text-decoration-none" href="{{ path('app_category_show', {id: category.id}) }}">{{category.name}}</a>
+                                    									</br>
 
-    {% for message in app.flashes('success') %}
-        <div class="bg-success my-3">
-            <h4>{{ message | join('. <br>') }}</h4>
-        </div>
-    {% endfor %}
-    {% for message in app.flashes('error') %}
-        <div class="bg-danger my-3">
-            <h4>{{ message | join('. <br>') }}</h4>
-        </div>
-    {% endfor %}
-    <table class="table" id="allTripsTable">
-        <!-- Table headers -->
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Departure</th>
-                <th>ComingBack</th>
-                <th>Price</th>
-                <th>Destination</th>
-                <th>Category</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Loop through all trips -->
-            {% for trip in trips %}
-                <tr>
-                    <!-- Trip details -->
-                    <td>{{ trip.name }}</td>
-                    <td>{{ trip.departure ? trip.departure|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ trip.comingBack ? trip.comingBack|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ trip.price }}€</td>
-                    <td>
-                        <a class="text-decoration-none" href="{{ path('app_destination_show', {id: trip.destination.id}) }}">{{ trip.destination.country }}/ {{ trip.destination.city }}</a>
-                    </td>
-                    <td>
-                        {% if trip.category is not empty %}
-                            <ul>
-                                {% for category in trip.category %}
-                                    <a class="fs-5 text-decoration-none" href="{{ path('app_category_show', {id: category.id}) }}">{{category.name}}</a>
-                                {% endfor %}
-                            </ul>
-                        {% else %}
-                            <p class="fs-5 text-info">No category associated with this trip!</p>
-                        {% endif %}
-                    </td>
-                    <td class="d-flex align-items-center gap-3">
-                        <a class="btn btn-info" href="{{ path('app_trip_show', {'id': trip.id}) }}">show</a>
-                        <a class="btn btn-warning" href="{{ path('app_trip_edit', {'id': trip.id}) }}">edit</a>
-                        {% include 'trip/_delete_form.html.twig' %}
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="7">No trip found</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+								{% endfor %}
+							
+						{% else %}
+							<p class="fs-5 text-info">No category associated with this trip!</p>
+						{% endif %}
+					</td>
+					<td class="d-flex align-items-center gap-3">
+						<a class="btn btn-info" href="{{ path('app_trip_show', {'id': trip.id}) }}">show</a>
+						<a class="btn btn-warning" href="{{ path('app_trip_edit', {'id': trip.id}) }}">edit</a>
+						{% include 'trip/_delete_form.html.twig' %}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="7">No trip found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 
-    <a class="btn btn-primary" href="{{ path('app_trip_new') }}">Create new</a>
+	<h1>All trips</h1>
 
-    <script>
-        // Sorting logic for the "My Trips" table
-        document.addEventListener("DOMContentLoaded", function () {
-            makeTableSortable("myTripsTable");
-            makeTableSortable("allTripsTable");
-        });
+	{% for message in app.flashes('success') %}
+		<div class="bg-success my-3">
+			<h4>{{ message | join('. <br>') }}</h4>
+		</div>
+	{% endfor %}
+	{% for message in app.flashes('error') %}
+		<div class="bg-danger my-3">
+			<h4>{{ message | join('. <br>') }}</h4>
+		</div>
+	{% endfor %}
+	<table
+		class="table" id="allTripsTable">
+		<!-- Table headers -->
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Departure</th>
+				<th>ComingBack</th>
+				<th>Price</th>
+				<th>Destination</th>
+				<th>Category</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- Loop through all trips -->
+			{% for trip in trips %}
+				<tr>
+					<!-- Trip details -->
+					<td>{{ trip.name }}</td>
+					<td>{{ trip.departure ? trip.departure|date('d/m/Y \\a\\t H:i') : '' }}</td>
+					<td>{{ trip.comingBack ? trip.comingBack|date('d/m/Y \\a\\t H:i') : '' }}</td>
+					<td>{{ trip.price }}€</td>
+					<td>
+						<a class="text-decoration-none" href="{{ path('app_destination_show', {id: trip.destination.id}) }}">{{ trip.destination.country }}/
+							{{ trip.destination.city }}</a>
+					</td>
+					<td>
+						{% if trip.category is not empty %}
+							
+								{% for category in trip.category %}
+                                    <a class="  text-decoration-none" href="{{ path('app_category_show', {id: category.id}) }}">{{category.name}}</a>
+									</br>
+								{% endfor %}
+						
+						{% else %}
+							<p class="fs-5 text-info">No category associated with this trip!</p>
+						{% endif %}
+					</td>
+					<td class="d-flex align-items-center gap-3">
+						<a class="btn btn-info" href="{{ path('app_trip_show', {'id': trip.id}) }}">show</a>
+						<a class="btn btn-warning" href="{{ path('app_trip_edit', {'id': trip.id}) }}">edit</a>
+						{% include 'trip/_delete_form.html.twig' %}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="7">No trip found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 
-        function makeTableSortable(tableId) {
-            document.querySelectorAll(`#${tableId} th`).forEach(function (header) {
-                header.style.cursor = "pointer";
-                header.addEventListener("click", function () {
-                    var columnIndex = header.cellIndex;
-                    sortTable(tableId, columnIndex);
-                });
-            });
-        }
+	<a class="btn btn-primary" href="{{ path('app_trip_new') }}">Create new</a>
 
-        function sortTable(tableId, columnIndex) {
-            var table = document.getElementById(tableId);
-            var rows = Array.from(table.querySelectorAll("tbody tr"));
+	<script>
+		// Sorting logic for the "My Trips" table
+document.addEventListener("DOMContentLoaded", function () {
+makeTableSortable("myTripsTable");
+makeTableSortable("allTripsTable");
+});
 
-            rows.sort(function (rowA, rowB) {
-                var cellA = rowA.cells[columnIndex].textContent.trim();
-                var cellB = rowB.cells[columnIndex].textContent.trim();
-                return cellA.localeCompare(cellB);
-            });
+function makeTableSortable(tableId) {
+document.querySelectorAll (`#${tableId} th`).forEach(function (header) {
+header.style.cursor = "pointer";
+header.addEventListener("click", function () {
+var columnIndex = header.cellIndex;
+sortTable(tableId, columnIndex);
+});
+});
+}
 
-            var tbody = table.querySelector("tbody");
-            tbody.innerHTML = "";
-            rows.forEach(function (row) {
-                tbody.appendChild(row);
-            });
-        }
-    </script>
+function sortTable(tableId, columnIndex) {
+var table = document.getElementById(tableId);
+var rows = Array.from(table.querySelectorAll("tbody tr"));
+
+rows.sort(function (rowA, rowB) {
+var cellA = rowA.cells[columnIndex].textContent.trim();
+var cellB = rowB.cells[columnIndex].textContent.trim();
+return cellA.localeCompare(cellB);
+});
+
+var tbody = table.querySelector("tbody");
+tbody.innerHTML = "";
+rows.forEach(function (row) {
+tbody.appendChild(row);
+});
+}
+	</script>
 {% endblock %}

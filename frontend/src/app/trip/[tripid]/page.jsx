@@ -1,8 +1,19 @@
 "use client";
-
 import Navbar from "@/app/components/navbar/Navbar";
 import React, { useState, useEffect } from "react";
 import "./page.css";
+
+function formatDate(dateString) {
+  const options = { 
+    day: '2-digit', 
+    month: '2-digit', 
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  };
+  const formattedDate = new Date(dateString).toLocaleString('en-GB', options);
+  return formattedDate;
+}
 
 function TripDetail(props) {
   const [trip, setTrip] = useState(null);
@@ -49,20 +60,20 @@ function TripDetail(props) {
       <Navbar />
       <div>
         <h2>{trip.name}</h2>
-        <p>Departure: {trip.departure}</p>
-        <p>Return: {trip.comingBack}</p>
+        <p>Departure: {formatDate(trip.departure)}</p>
+        <p>Return: {formatDate(trip.comingBack)}</p>
         <p>Description: {trip.description}</p>
         <p>Price: {trip.price} €</p>
         <p>Country: {trip.Destination.country}</p>
         <p>City: {trip.Destination.city}</p>
         <p>Category: </p>{" "}
-        {trip.Category.map((category) => (
-          <ul>
+        {trip.Category.map((category, index) => ( // Add index as key
+          <ul key={index}>
             <li>{category.name}</li>
           </ul>
         ))}
-        <img src={trip.Destination.image} alt={trip.name} />
       </div>
+        <img src={trip.Destination.image} alt={trip.name} />
     </>
   );
 }
