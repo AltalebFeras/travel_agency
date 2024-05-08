@@ -6,20 +6,29 @@ import "./tripCardTeaser.css";
 import Image from "next/image";
 
 export default function TripCardTeaser(props) {
-  const { name, price, image } = props; // Destructure 'name', 'price', and 'image' from props
+  const { name, departure, comingBack,country, city, price, image , categoryName } = props; // Destructure 'name', 'price', and 'image' from props
   return (
-    <div className="trip-card">
-      <div className="trip-card-image">
-        <Image
-          width={250}
-          height={250}
-          src={image} 
-          alt={"Image of " + name} // Use 'name' from props
-        />
-      </div>
-      <div className="trip-card-information">
-        <p className="trip-card-name">{name}</p> 
-        <p className="trip-card-description">{price}</p> 
+    <div className="card">
+      <div className="card-inner">
+        <div
+          className="card-front"
+          style={{
+            backgroundImage: `url(${image})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <p className="trip-card-name">{name}</p>
+        </div>
+        <div className="card-back">
+          <div></div>
+          <div>
+            <p>Trip to</p>
+            {country } /  {city}
+           <p className="trip-card-description">Price : {price}</p>
+           
+          </div>
+        </div>
       </div>
     </div>
   );

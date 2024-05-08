@@ -4,4 +4,14 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 40px;
+    padding-top: 50pX;
+}
+.tripName{
+    font-weight: 800;
+    font-size: x-large;
+
+}
+a{
+    text-decoration: none;
+    text-align:  center;
 }
