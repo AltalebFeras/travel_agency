@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/navbar/Navbar';
 import TripsList from '../components/tripsList/TripsList';
@@ -32,5 +31,3 @@ function FetchTrips() {
 }
 
 export default FetchTrips;
-
-
