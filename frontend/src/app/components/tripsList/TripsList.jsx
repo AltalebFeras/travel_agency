@@ -35,3 +35,4 @@ function TripsList({ trips }) { // Destructure 'trips' directly
 }
 
 export default TripsList;
+
