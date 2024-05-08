@@ -1,6 +1,6 @@
 'use client'
 
-import Navbar from "./conponant/Navbar";
+import Navbar from "./components/navbar/Navbar";
 
 
 
