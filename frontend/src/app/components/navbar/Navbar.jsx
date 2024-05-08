@@ -11,13 +11,13 @@ export default function Navbar() {
                 <nav  >
                     <ul className="navigation">
                         <li>
-                            <Link class="navbar-brand" href="/">accueil</Link>
+                            <Link className="navbar-brand" href="/">accueil</Link>
                         </li>
                         <li>
-                            <Link class="navbar-brand" href="/trip">trips</Link>
+                            <Link className="navbar-brand" href="/trip">trips</Link>
                         </li>
                         <li>
-                            <Link class="navbar-brand" href="/contact">contact</Link>
+                            <Link className="navbar-brand" href="/contact">contact</Link>
                         </li>
                     </ul>
                 </nav>

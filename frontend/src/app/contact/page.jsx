@@ -8,6 +8,7 @@ export default function Contact() {
     
       <Navbar />
         <h1>Hello from Contact</h1>
+        
       </>
     );
   }

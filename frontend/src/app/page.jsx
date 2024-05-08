@@ -1,6 +1,7 @@
 'use client'
 
 import Navbar from "./components/navbar/Navbar";
+import TripsList from "./components/tripsList/TripsList";
 
 
 
@@ -10,6 +11,6 @@ export default function Home() {
     
     <Navbar/>
     <h1>Hello</h1>
-    </>
+        </>
   );
 }
