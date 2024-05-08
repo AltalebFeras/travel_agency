@@ -71,7 +71,6 @@ class DestinationController extends AbstractController
     }
 
     #[Route('/{id}', name: 'delete', methods: ['POST'])]
-    #[Route('/{id}', name: 'delete', methods: ['POST'])]
 public function delete(Request $request, Destination $destination, EntityManagerInterface $entityManager): Response
 {
     $submittedToken = $request->request->get('_token');
@@ -82,7 +81,7 @@ public function delete(Request $request, Destination $destination, EntityManager
             $entityManager->flush();
             $this->addFlash('successD', 'The destination has been deleted successfully');
         } catch (\Exception $e) {
-            $this->addFlash('errorD', 'Unable to delete the destination. It is associated with a valid trip.');
+$this->addFlash('errorD', 'Unable to delete the destination. It is associated with a valid trip.');            
         }
     } else {
         $this->addFlash('errorD', 'Invalid CSRF token.');
