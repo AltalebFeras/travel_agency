@@ -98,7 +98,7 @@ INSERT INTO `destination` (`id`, `country`, `city`, `image`) VALUES
 (7, 'South Korea', 'Seoul', 'https://images.unsplash.com/photo-1570191913384-7b4ff11716e7?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
 (8, 'Canada', 'Vancouver', 'https://images.unsplash.com/photo-1559510904-60bd53ecb973?q=80&w=1537&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
 (9, 'Singapore', 'Singapore', 'https://images.unsplash.com/photo-1542114740389-9b46fb1e5be7?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
-(10, 'Hungary', 'Budapest', 'https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(20).webp'),
+(10, 'Hungary', 'Budapest', 'https://images.unsplash.com/photo-1565426873118-a17ed65d74b9?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
 (11, 'Italy', 'Florence', 'https://images.unsplash.com/photo-1537366057310-3501fc868fd8?q=80&w=1315&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
 (12, 'USA', 'San Francisco', 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
 (13, 'Japan', 'Kyoto', 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
