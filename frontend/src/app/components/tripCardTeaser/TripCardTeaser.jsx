@@ -6,7 +6,7 @@ export default function TripCardTeaser(props) {
   const { name, country, city, price, image } = props;
 
   return (
-    <div className="card">
+    <div className="card ">
       <div className="card-inner">
         <div
           className="card-front"

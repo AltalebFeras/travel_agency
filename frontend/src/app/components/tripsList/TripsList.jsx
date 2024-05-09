@@ -22,11 +22,11 @@ function TripsList(props) {
   return (
     <div>
       {filteredTrips && (
-        <ul className="trips-list">
+        <ul className="trips-list ">
           {filteredTrips.map((trip, index) => (
             <Link key={index} href={"/trip/" + trip.id}>
-              <li>
-                <div className="tripName">{trip.name}</div>
+              <li className="shadow-lg">
+                <div className="tripName ">{trip.name}</div>
                 <TripCardTeaser
                   name={trip.name}
                   price={trip.price + "  €"}
