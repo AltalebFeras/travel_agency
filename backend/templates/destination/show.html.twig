@@ -22,9 +22,9 @@
 					{% if destination.trips is not empty %}
 						<ul>
 							{% for trip in destination.trips %}
-								<li>
-									<a class=" fs-4 text-decoration-none" href="{{ path('app_trip_show', {id: trip.id}) }}">{{ trip.name }}</a>
-								</li>
+								
+									<a class=" fs-5 text-decoration-none" href="{{ path('app_trip_show', {id: trip.id}) }}"><li>{{ trip.name }}</li></a>
+								
 							{% endfor %}
 						</ul>
 					{% else %}

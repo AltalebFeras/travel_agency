@@ -21,9 +21,9 @@
                     {% if category.tripCategory is not empty %}
                         <ul>
                             {% for trip in category.tripCategory %}
-                                <li>
-                                    <a class="fs-4 text-decoration-none" href="{{ path('app_trip_show', {id: trip.id}) }}">{{ trip.name }}</a>
-                                </li>
+                                
+                                    <a class="fs-5 text-decoration-none" href="{{ path('app_trip_show', {id: trip.id}) }}"><li>{{ trip.name }} </li></a>
+                               
                             {% endfor %}
                         </ul>
                     {% else %}

@@ -26,7 +26,7 @@
 				<th>ComingBack</th>
 				<th>Price</th>
 				<th>Destination</th>
-				<th>Category</th>
+				{# <th>Category</th> #}
 				<th>actions</th>
 			</tr>
 		</thead>
@@ -44,7 +44,7 @@
 						<a class="text-decoration-none" href="{{ path('app_destination_show', {id: trip.destination.id}) }}">{{ trip.destination.country }}/
 							{{ trip.destination.city }}</a>
 					</td>
-					<td>
+					{# <td>
 						{% if trip.category is not empty %}
 							
 								{% for category in trip.category %}
@@ -56,7 +56,7 @@
 						{% else %}
 							<p class="fs-5 text-info">No category associated with this trip!</p>
 						{% endif %}
-					</td>
+					</td> #}
 					<td class="d-flex align-items-center gap-3">
 						<a class="btn btn-info" href="{{ path('app_trip_show', {'id': trip.id}) }}">show</a>
 						<a class="btn btn-warning" href="{{ path('app_trip_edit', {'id': trip.id}) }}">edit</a>
@@ -70,6 +70,7 @@
 			{% endfor %}
 		</tbody>
 	</table>
+	<a class="btn btn-primary" href="{{ path('app_trip_new') }}">Create new</a>
 
 	<h1>All trips</h1>
 
@@ -93,7 +94,6 @@
 				<th>ComingBack</th>
 				<th>Price</th>
 				<th>Destination</th>
-				<th>Category</th>
 				<th>actions</th>
 			</tr>
 		</thead>
@@ -110,18 +110,7 @@
 						<a class="text-decoration-none" href="{{ path('app_destination_show', {id: trip.destination.id}) }}">{{ trip.destination.country }}/
 							{{ trip.destination.city }}</a>
 					</td>
-					<td>
-						{% if trip.category is not empty %}
-							
-								{% for category in trip.category %}
-                                    <a class="  text-decoration-none" href="{{ path('app_category_show', {id: category.id}) }}">{{category.name}}</a>
-									</br>
-								{% endfor %}
-						
-						{% else %}
-							<p class="fs-5 text-info">No category associated with this trip!</p>
-						{% endif %}
-					</td>
+			
 					<td class="d-flex align-items-center gap-3">
 						<a class="btn btn-info" href="{{ path('app_trip_show', {'id': trip.id}) }}">show</a>
 						<a class="btn btn-warning" href="{{ path('app_trip_edit', {'id': trip.id}) }}">edit</a>
@@ -136,7 +125,6 @@
 		</tbody>
 	</table>
 
-	<a class="btn btn-primary" href="{{ path('app_trip_new') }}">Create new</a>
 
 	<script>
 		// Sorting logic for the "My Trips" table

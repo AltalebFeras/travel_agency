@@ -1,59 +1,68 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ trip.name }}
+	{{ trip.name }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ trip.name }} information</h1>
+	<h1>{{ trip.name }}
+		information</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Name</th>
-                <td>{{ trip.name }}</td>
-            </tr>
-            <tr>
-                <th>Departure &#128747;</th>
-                <td>{{ trip.departure ? trip.departure|date('d/m/Y \\a\\t H:i') : '' }}</td>
-            </tr>
-            <tr>
-                <th>ComingBack &#128748;</th>
-                <td>{{ trip.comingBack ? trip.comingBack|date('d/m/Y \\a\\t H:i') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td class="fw-bold">{{ trip.description }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td class="fst-italic fw-bold">{{ trip.price }} €</td>
-            </tr>
-            <tr>
-                <th>Categories associated</th>
-                <td>
-                    {% if trip.category is not empty %}
-                        <ul>
-                            {% for category in trip.category %}
-                                <a class="fs-5 text-decoration-none" href="{{ path('app_category_show', {id: category.id}) }}">{{category.name}}</a>
-                            {% endfor %}
-                        </ul>
-                    {% else %}
-                        <p class="fs-5 text-info ">No category associated with this trip !</p>
-                    {% endif %}
-                </td>
-            </tr>
-            <tr>
-                <th>Destination</th>
-                <td>
-                    <a class="fs-5 text-decoration-none" href="{{ path('app_destination_show', {id: trip.destination.id}) }}">{{ trip.destination.country }} / {{ trip.destination.city }}</a>
-                </td>
-            </tr>
-            <tr>
-                <th>Created by</th>
-                <td>{{ trip.user.Firstname ~ " " ~ trip.user.lastName }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <a class="btn btn-secondary" href="{{ path('app_trip_index') }}">back to list</a>
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Name</th>
+				<td>{{ trip.name }}</td>
+			</tr>
+			<tr>
+				<th>Departure &#128747;</th>
+				<td>{{ trip.departure ? trip.departure|date('d/m/Y \\a\\t H:i') : '' }}</td>
+			</tr>
+			<tr>
+				<th>ComingBack &#128748;</th>
+				<td>{{ trip.comingBack ? trip.comingBack|date('d/m/Y \\a\\t H:i') : '' }}</td>
+			</tr>
+			<tr>
+				<th>Description</th>
+				<td class="fw-bold">{{ trip.description }}</td>
+			</tr>
+			<tr>
+				<th>Price</th>
+				<td class="fst-italic fw-bold">{{ trip.price }}
+					€</td>
+			</tr>
+			<tr>
+				<th>Categories associated</th>
+				<td>
+					{% if trip.category is not empty %}
+						<ul>
+							{% for category in trip.category %}
+								<ul>
+									<a class="fs-5 text-decoration-none" href="{{ path('app_category_show', {id: category.id}) }}">
+										<li>{{category.name}}</li>
+									</a>
+								</ul>
+
+							{% endfor %}
+						</ul>
+					{% else %}
+						<p class="fs-5 text-info ">No category associated with this trip !</p>
+					{% endif %}
+				</td>
+			</tr>
+			<tr>
+				<th>Destination</th>
+				<td>
+					<a class="fs-5 text-decoration-none" href="{{ path('app_destination_show', {id: trip.destination.id}) }}">{{ trip.destination.country }}
+						/
+						{{ trip.destination.city }}</a>
+				</td>
+			</tr>
+			<tr>
+				<th>Created by</th>
+				<td>{{ trip.user.Firstname ~ " " ~ trip.user.lastName }}</td>
+			</tr>
+		</tbody>
+	</table>
+	<a class="btn btn-secondary" href="{{ path('app_trip_index') }}">back to list</a>
 {% endblock %}
