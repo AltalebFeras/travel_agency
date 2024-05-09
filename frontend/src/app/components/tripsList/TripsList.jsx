@@ -1,36 +1,42 @@
 "use client";
-
 import Link from "next/link";
 import React from "react";
 import "./tripsList.css";
 import TripCardTeaser from "../tripCardTeaser/TripCardTeaser";
 
 function TripsList(props) {
-  // Destructure 'trips' directly
+  const { trips, countryFilter, categoryFilter, dateFilter } = props;
+
+  // Filter trips based on the provided filters
+  const filteredTrips = trips.filter(trip => {
+    if (countryFilter && trip.Destination.country !== countryFilter) return false;
+    if (categoryFilter && !trip.Category.some(category => category.name === categoryFilter)) return false;
+    if (dateFilter) {
+      const tripDate = new Date(trip.departure);
+      const filterDate = new Date(dateFilter);
+      if (tripDate.toDateString() !== filterDate.toDateString()) return false;
+    }
+    return true;
+  });
+
   return (
     <div>
-      {props.trips && (
+      {filteredTrips && (
         <ul className="trips-list">
-          {props.trips.map(
-            (
-              trip,
-              index 
-            ) => (
-              <Link key={index} href={"/trip/" + trip.id}>
-                <li>
-                  <div className="tripName">{trip.name}</div>
-                  <TripCardTeaser
-                    // departure={trip.departure} // Change 'trips' to 'trip'
-                    // comingBack={trip.comingBack} // Change 'trips' to 'trip'
-                    price={trip.price + "  €"}
-                    city={trip.Destination.city} // Access image from Destination object
-                    country={trip.Destination.country} // Access image from Destination object
-                    image={trip.Destination.image} // Access image from Destination object
-                  />
-                </li>
-              </Link>
-            )
-          )}
+          {filteredTrips.map((trip, index) => (
+            <Link key={index} href={"/trip/" + trip.id}>
+              <li>
+                <div className="tripName">{trip.name}</div>
+                <TripCardTeaser
+                  name={trip.name}
+                  price={trip.price + "  €"}
+                  city={trip.Destination.city}
+                  country={trip.Destination.country}
+                  image={trip.Destination.image}
+                />
+              </li>
+            </Link>
+          ))}
         </ul>
       )}
     </div>
