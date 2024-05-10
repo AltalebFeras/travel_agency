@@ -72,3 +72,5 @@ function getImageURL(index) {
       return ""; // Handle default case if needed
   }
 }
+
+
