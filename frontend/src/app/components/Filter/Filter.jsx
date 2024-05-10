@@ -74,7 +74,7 @@ export default function Filter(props) {
               name="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="input"
+              className="inputSearch"
               placeholder="type to search"
             ></input>
           </div>

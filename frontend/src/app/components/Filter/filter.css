@@ -27,7 +27,7 @@
     margin-bottom: 20px;
     font-weight: bold;
   }
-  .box-input {
+  .box-inputSearch {
     position: relative;
   }
   
@@ -40,7 +40,7 @@
     padding: 4px;
   }
   
-  .input {
+  .inputSearch {
     background-color: #212121;
     max-width: 250px;
     height: 40px;
@@ -53,8 +53,8 @@
     overflow: hidden;
   }
   
-  .box-input::after,
-  .box-input::before {
+  .box-inputSearch::after,
+  .box-inputSearch::before {
     content: "";
     width: 130px;
     height: 30px;
@@ -62,21 +62,21 @@
     z-index: -1;
   }
   
-  .box-input::after {
+  .box-inputSearch::after {
     bottom: 0;
     right: 0;
   }
   
-  .box-input::before {
+  .box-inputSearch::before {
     top: 0;
     left: 0;
   }
   
-  .input::placeholder {
+  .inputSearch::placeholder {
     transition: all 0.5s ease-in, transform 0.2s ease-in 0.6s;
   }
   
-  .input:focus::placeholder {
+  .inputSearch:focus::placeholder {
     padding-left: 165px;
     transform: translateY(-50px);
   }

@@ -1,3 +1,7 @@
+"use client";
+
+
+import ContactForm from "../components/contactForm/ContactForm";
 import Navbar from "../components/navbar/Navbar";
 
 export default function Contact() {
@@ -7,7 +11,10 @@ export default function Contact() {
         <>
     
       <Navbar />
-        <h1>Hello from Contact</h1>
+        <div className="contactForm  pt-5">
+        <ContactForm/>
+
+        </div>
         
         
       </>

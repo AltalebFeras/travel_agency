@@ -2,16 +2,17 @@
 import Navbar from "@/app/components/navbar/Navbar";
 import React, { useState, useEffect } from "react";
 import "./page.css";
+import RegistrationForm from "@/app/components/registrationForm/RegistrationForm";
 
 function formatDate(dateString) {
-  const options = { 
-    day: '2-digit', 
-    month: '2-digit', 
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
+  const options = {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
   };
-  const formattedDate = new Date(dateString).toLocaleString('en-GB', options);
+  const formattedDate = new Date(dateString).toLocaleString("en-GB", options);
   return formattedDate;
 }
 
@@ -40,17 +41,9 @@ function TripDetail(props) {
 
   if (loading)
     return (
-      <div>
-        <div className="middle">
-          <div className="bar bar1"></div>
-          <div className="bar bar2"></div>
-          <div className="bar bar3"></div>
-          <div className="bar bar4"></div>
-          <div className="bar bar5"></div>
-          <div className="bar bar6"></div>
-          <div className="bar bar7"></div>
-          <div className="bar bar8"></div>
-        </div>
+      <div className="loader-container">
+        <div className="loader"></div>
+        <div className="loader-text">Loading...</div>
       </div>
     );
   if (error) return <div>Error: {error}</div>;
@@ -58,22 +51,34 @@ function TripDetail(props) {
   return (
     <>
       <Navbar />
-      <div>
-        <h2>{trip.name}</h2>
-        <p>Departure: {formatDate(trip.departure)}</p>
-        <p>Return: {formatDate(trip.comingBack)}</p>
-        <p>Description: {trip.description}</p>
-        <p>Price: {trip.price} €</p>
-        <p>Country: {trip.Destination.country}</p>
-        <p>City: {trip.Destination.city}</p>
-        <p>Category: </p>{" "}
-        {trip.Category.map((category, index) => ( // Add index as key
-          <ul key={index}>
-            <li>{category.name}</li>
-          </ul>
-        ))}
+      <div className="d-flex ">
+        <div>
+          <h2>{trip.name}</h2>
+          <p>Departure: {formatDate(trip.departure)}</p>
+          <p>Return: {formatDate(trip.comingBack)}</p>
+          <p>Description: {trip.description}</p>
+          <p>Price: {trip.price} €</p>
+          <p>Country: {trip.Destination.country}</p>
+          <p>City: {trip.Destination.city}</p>
+          <p>Category: </p>{" "}
+          {trip.Category.map(
+            (
+              category,
+              index // Add index as key
+            ) => (
+              <ul key={index}>
+                <li>{category.name}</li>
+              </ul>
+            )
+          )}
+        </div>
+        <div>
+          <img src={trip.Destination.image} alt={trip.name} />
+        </div>
       </div>
-        <img src={trip.Destination.image} alt={trip.name} />
+      <div>
+        <RegistrationForm tripId={trip.id} />
+      </div>
     </>
   );
 }
