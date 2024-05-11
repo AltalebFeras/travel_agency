@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Destination  
+{% block title %}Destination
 {% endblock %}
 
 {% block body %}
-	<h1> ALL Destinations </h1>
+	<h1>
+		ALL Destinations
+	</h1>
 
 	{% for message in app.flashes('successD') %}
 		<div class="bg-success my-3">
@@ -26,7 +28,11 @@
 			</tr>
 		</thead>
 		<tbody>
+			{% set destinationCount = 0 %}
+
 			{% for destination in destinations %}
+				{% set destinationCount = destinationCount + 1 %}
+				
 				<tr>
 					<td>{{ destination.country }}</td>
 					<td>{{ destination.city }}</td>
@@ -45,6 +51,7 @@
 			{% endfor %}
 		</tbody>
 	</table>
-
+<h5 class="my-3">Total destination:
+		{{ destinationCount }}</h5>
 	<a class="btn btn-primary" href="{{ path('app_destination_new') }}">Create new</a>
 {% endblock %}

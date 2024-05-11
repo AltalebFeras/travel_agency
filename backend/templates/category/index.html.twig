@@ -6,12 +6,12 @@
 {% block body %}
 	<h1>All Categories
 	</h1>
-{% for message in app.flashes('successC') %}
+	{% for message in app.flashes('successC') %}
 		<div class="bg-success my-3">
 			<h4>{{ message | join('. <br>') }}</h4>
 		</div>
 	{% endfor %}
-{% for message in app.flashes('errorC') %}
+	{% for message in app.flashes('errorC') %}
 		<div class="bg-danger my-3">
 			<h4>{{ message | join('. <br>') }}</h4>
 		</div>
@@ -25,12 +25,16 @@
 			</tr>
 		</thead>
 		<tbody>
+			{% set categoryCount = 0 %}
+
 			{% for category in categories %}
+				{% set categoryCount = categoryCount + 1 %}
+
 				<tr>
 					<td>{{ category.name }}</td>
 					<td>{{ category.description }}</td>
 					<td class="d-flex  align-items-center gap-3">
-						<a class="btn btn-info"  href="{{ path('app_category_show', {'id': category.id}) }}">show</a>
+						<a class="btn btn-info" href="{{ path('app_category_show', {'id': category.id}) }}">show</a>
 						<a class="btn btn-warning" href="{{ path('app_category_edit', {'id': category.id}) }}">edit</a>
 						{{ include('category/_delete_form.html.twig') }}
 
@@ -44,6 +48,8 @@
 			{% endfor %}
 		</tbody>
 	</table>
+	<h5 class="my-3">Total categories:
+		{{ categoryCount }}</h5>
 
 	<a class="btn btn-primary" href="{{ path('app_category_new') }}">Create new</a>
 {% endblock %}

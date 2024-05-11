@@ -14,15 +14,14 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstName')
-            ->add('lastName')
-            ->add('email')
-            ->add('message')
             ->add('Status', EntityType::class, [
                 'class' => Status::class,
-'choice_label' => 'name',
+                'choice_label' => 'name',
             ])
-        ;
+            ->add('firstName', null, ['disabled' => true])
+            ->add('lastName', null, ['disabled' => true])
+            ->add('email', null, ['disabled' => true])
+            ->add('message', null, ['disabled' => true]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

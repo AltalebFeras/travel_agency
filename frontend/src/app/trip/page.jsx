@@ -74,7 +74,6 @@ function FetchTrips() {
         categories={categories}
       />
 
-      <div className="px-3 fs-4  total-trips">Total Trips: {trips.length}</div>
 
       {loading ? (
         <div className="loader-container">

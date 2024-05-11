@@ -26,37 +26,24 @@
 				<th>ComingBack</th>
 				<th>Price</th>
 				<th>Destination</th>
-				{# <th>Category</th> #}
 				<th>actions</th>
 			</tr>
 		</thead>
 		<tbody>
 			<!-- Loop through user's trips -->
+			{% set tripCount = 0 %}
 			{% for trip in app.user.trips %}
+				{% set tripCount = tripCount + 1 %}
 				<tr>
 					<!-- Trip details -->
 					<td>{{ trip.name }}</td>
 					<td>{{ trip.departure ? trip.departure|date('d/m/Y \\a\\t H:i') : '' }}</td>
 					<td>{{ trip.comingBack ? trip.comingBack|date('d/m/Y \\a\\t H:i') : '' }}</td>
-
 					<td>{{ trip.price }}€</td>
 					<td>
 						<a class="text-decoration-none" href="{{ path('app_destination_show', {id: trip.destination.id}) }}">{{ trip.destination.country }}/
 							{{ trip.destination.city }}</a>
 					</td>
-					{# <td>
-						{% if trip.category is not empty %}
-							
-								{% for category in trip.category %}
-									<a class="text-decoration-none" href="{{ path('app_category_show', {id: category.id}) }}">{{category.name}}</a>
-                                    									</br>
-
-								{% endfor %}
-							
-						{% else %}
-							<p class="fs-5 text-info">No category associated with this trip!</p>
-						{% endif %}
-					</td> #}
 					<td class="d-flex align-items-center gap-3">
 						<a class="btn btn-info" href="{{ path('app_trip_show', {'id': trip.id}) }}">show</a>
 						<a class="btn btn-warning" href="{{ path('app_trip_edit', {'id': trip.id}) }}">edit</a>
@@ -65,12 +52,16 @@
 				</tr>
 			{% else %}
 				<tr>
-					<td colspan="7">No trip found</td>
+					<td colspan="6">No trip found</td>
 				</tr>
 			{% endfor %}
 		</tbody>
 	</table>
+	<h5 class="my-3">Total trips created by me:
+		{{ tripCount }}</h5>
+
 	<a class="btn btn-primary" href="{{ path('app_trip_new') }}">Create new</a>
+
 
 	<h1>All trips</h1>
 
@@ -99,7 +90,10 @@
 		</thead>
 		<tbody>
 			<!-- Loop through all trips -->
+			{% set tripCount = 0 %}
 			{% for trip in trips %}
+				{% set tripCount = tripCount + 1 %}
+				
 				<tr>
 					<!-- Trip details -->
 					<td>{{ trip.name }}</td>
@@ -110,7 +104,7 @@
 						<a class="text-decoration-none" href="{{ path('app_destination_show', {id: trip.destination.id}) }}">{{ trip.destination.country }}/
 							{{ trip.destination.city }}</a>
 					</td>
-			
+
 					<td class="d-flex align-items-center gap-3">
 						<a class="btn btn-info" href="{{ path('app_trip_show', {'id': trip.id}) }}">show</a>
 						<a class="btn btn-warning" href="{{ path('app_trip_edit', {'id': trip.id}) }}">edit</a>
@@ -122,6 +116,9 @@
 					<td colspan="7">No trip found</td>
 				</tr>
 			{% endfor %}
+			<h5 class="my-3">Total trips:
+		{{ tripCount }}</h5>
+
 		</tbody>
 	</table>
 

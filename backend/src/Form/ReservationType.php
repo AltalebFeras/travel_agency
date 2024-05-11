@@ -16,23 +16,20 @@ class ReservationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstName')
-            ->add('lastName')
-            ->add('telephone')
-            ->add('email')
-            ->add('trip', EntityType::class, [
-                'class' => Trip::class,
-                'choice_label' => 'name',
-            ])
-            ->add('Status', EntityType::class, [
+            ->add('status', EntityType::class, [
                 'class' => Status::class,
                 'choice_label' => 'name',
             ])
-          
-            ;
+            ->add('firstName', null, ['disabled' => true])
+            ->add('lastName', null, ['disabled' => true])
+            ->add('telephone', null, ['disabled' => true])
+            ->add('email', null, ['disabled' => true])
+            ->add('trip', EntityType::class, [
+                'class' => Trip::class,
+                'choice_label' => 'name',
+                'disabled' => true,
+            ]);
     }
-
-
 
     public function configureOptions(OptionsResolver $resolver): void
     {

@@ -80,6 +80,8 @@ export default function Filter(props) {
           </div>
         </div>
       </div>
+<div className="px-3 fs-4  total-trips">Total Trips: {trips.length}</div>
+    
     </>
   );
 }
