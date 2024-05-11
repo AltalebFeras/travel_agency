@@ -5,8 +5,9 @@ import TripsList from '../components/tripsList/TripsList';
 import Filter from '../components/filter/Filter'; // Updated import
 import "./page.css";
 import Footer from '../components/footer/Footer';
+import RandomTrips from '../components/randomTrips/RandomTrips';
 
-export default function FetchTrips() {
+export default function FetchTripsRandom() {
   const [loading, setLoading] = useState(true);
   const [trips, setTrips] = useState([]);
   const [countryFilter, setCountryFilter] = useState("");
@@ -14,8 +15,8 @@ export default function FetchTrips() {
   const [startDateFilter, setStartDateFilter] = useState("");
   const [endDateFilter, setEndDateFilter] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  const [countries, setCountries] = useState([]);
-  const [categories, setCategories] = useState([]);
+//   const [countries, setCountries] = useState([]);
+//   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,14 +35,14 @@ export default function FetchTrips() {
     fetchData();
   }, []);
 
-  // Function to extract unique countries and categories from trips data
-  const extractFilterOptions = (trips) => {
-    const uniqueCountries = [...new Set(trips.map(trip => trip.Destination.country))];
-    setCountries(uniqueCountries);
+//   // Function to extract unique countries and categories from trips data
+//   const extractFilterOptions = (trips) => {
+//     const uniqueCountries = [...new Set(trips.map(trip => trip.Destination.country))];
+//     setCountries(uniqueCountries);
     
-    const uniqueCategories = [...new Set(trips.flatMap(trip => trip.Category.map(category => category.name)))];
-    setCategories(uniqueCategories);
-  };
+//     const uniqueCategories = [...new Set(trips.flatMap(trip => trip.Category.map(category => category.name)))];
+//     setCategories(uniqueCategories);
+//   };
 
   // Function to filter trips based on the selected filters
   const filterTrips = (trip) => {
@@ -58,23 +59,7 @@ export default function FetchTrips() {
 
   return (
     <>
-      <Navbar />
-      <Filter
-        trips={filteredTrips}
-        countryFilter={countryFilter}
-        setCountryFilter={setCountryFilter}
-        categoryFilter={categoryFilter}
-        setCategoryFilter={setCategoryFilter}
-        startDateFilter={startDateFilter}
-        setStartDateFilter={setStartDateFilter}
-        endDateFilter={endDateFilter}
-        setEndDateFilter={setEndDateFilter}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        countries={countries}
-        categories={categories}
-      />
-
+    
 
       {loading ? (
         <div className="loader-container">
@@ -83,12 +68,11 @@ export default function FetchTrips() {
         </div>  
       ) : (
         <div>
-          {/* Pass filtered trips to TripsList component */}
-          <TripsList trips={filteredTrips} />
+            <div className='m-3'><h2>Favorites destinations</h2></div>
+          <RandomTrips tripsData={filteredTrips} />
         </div>
       )}
 
-      <Footer/>
 
     </>
   );

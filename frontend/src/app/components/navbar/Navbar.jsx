@@ -11,13 +11,13 @@ export default function Navbar() {
                 <nav  >
                     <ul className="navigation">
                         <li>
-                            <Link className="navbar-brand btn btn-light" href="/">Accueil</Link>
+                            <Link className="navbar-brand btn btn-light" href="/">Home</Link>
                         </li>
                         <li>
                             <Link className="navbar-brand btn btn-light" href="/trip">Trips</Link>
                         </li>
                         <li>
-                            <Link className="navbar-brand btn btn-light" href="/contact">Contact US</Link>
+                            <Link className="navbar-brand btn btn-light" href="/contact">Contact us</Link>
                         </li>
                     </ul>
                 </nav>
