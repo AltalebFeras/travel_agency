@@ -10,7 +10,7 @@ function RandomTrips({ tripsData }) {
 
   const selectRandomTrips = (data) => {
     const randomIndices = [];
-    while (randomIndices.length < 5) {
+    while (randomIndices.length < 4) {
       const randomIndex = Math.floor(Math.random() * data.length);
       if (!randomIndices.includes(randomIndex)) {
         randomIndices.push(randomIndex);

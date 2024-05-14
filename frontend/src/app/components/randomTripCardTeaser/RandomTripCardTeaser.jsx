@@ -6,10 +6,10 @@ export default function RandomTripCardTeaser(props) {
   const { name, country, city, price, image } = props;
 
   return (
-    <div className="card ">
-      <div className="card-inner">
+    <div className="cardRandom ">
+      <div className="cardRandom-inner">
         <div
-          className="card-front"
+          className="cardRandom-front"
           style={{
             backgroundImage: `url(${image})`,
             backgroundSize: "cover",
@@ -17,12 +17,12 @@ export default function RandomTripCardTeaser(props) {
           }}
         >
         </div>
-        <div className="card-back">
+        <div className="cardRandom-back">
           <div></div>
           <div>
             <p>Trip to</p>
             {country} / {city}
-            <p className="trip-card-description">Price : {price}</p>
+            <p className="trip-cardRandom-description">Price : {price}</p>
           </div>
         </div>
       </div>
