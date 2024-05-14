@@ -3,6 +3,7 @@ import Navbar from "@/app/components/navbar/Navbar";
 import React, { useState, useEffect } from "react";
 import "./page.css";
 import RegistrationForm from "@/app/components/registrationForm/RegistrationForm";
+import TripStyle from "../tripeStyle/TripStyle";
 
 function formatDate(dateString) {
   const options = {
@@ -51,32 +52,20 @@ function TripDetail(props) {
   return (
     <>
       <Navbar />
-      <div className="d-flex ">
-        <div>
-          <h2>{trip.name}</h2>
-          <p>Departure: {formatDate(trip.departure)}</p>
-          <p>Return: {formatDate(trip.comingBack)}</p>
-          <p>Description: {trip.description}</p>
-          <p>Price: {trip.price} €</p>
-          <p>Country: {trip.Destination.country}</p>
-          <p>City: {trip.Destination.city}</p>
-          <p>Category: </p>{" "}
-          {trip.Category.map(
-            (
-              category,
-              index // Add index as key
-            ) => (
-              <ul key={index}>
-                <li>{category.name}</li>
-              </ul>
-            )
-          )}
-        </div>
-        <div>
-          <img src={trip.Destination.image} alt={trip.name} />
-        </div>
-      </div>
-      <div>
+      <div className="d-flex flex-column">
+       <TripStyle
+       
+       name={trip.name}
+       departure={trip.departure}
+       comingBack={trip.comingBack}
+       description={trip.description}
+       price={trip.price}
+       country={trip.Destination.country}
+       city={trip.Destination.city}
+       Category={trip.Category}
+       image={trip.Destination.image}
+       
+       />
         <RegistrationForm tripId={trip.id} />
       </div>
     </>
