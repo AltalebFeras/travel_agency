@@ -177,11 +177,11 @@ CREATE TABLE IF NOT EXISTS `reply` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reply_to_conatct_request`
+-- Table structure for table `reply_to_contact_request`
 --
 
-DROP TABLE IF EXISTS `reply_to_conatct_request`;
-CREATE TABLE IF NOT EXISTS `reply_to_conatct_request` (
+DROP TABLE IF EXISTS `reply_to_contact_request`;
+CREATE TABLE IF NOT EXISTS `reply_to_contact_request` (
   `id` int NOT NULL AUTO_INCREMENT,
   `contact_id` int DEFAULT NULL,
   `content` varchar(999) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -491,9 +491,9 @@ ALTER TABLE `reply`
   ADD CONSTRAINT `FK_FDA8C6E0B83297E7` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`);
 
 --
--- Constraints for table `reply_to_conatct_request`
+-- Constraints for table `reply_to_contact_request`
 --
-ALTER TABLE `reply_to_conatct_request`
+ALTER TABLE `reply_to_contact_request`
   ADD CONSTRAINT `FK_D8519DE4E7A1254A` FOREIGN KEY (`contact_id`) REFERENCES `contact` (`id`);
 
 --

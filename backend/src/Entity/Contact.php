@@ -47,14 +47,14 @@ class Contact
     private ?Status $status = null;
 
     /**
-     * @var Collection<int, ReplyToConatctRequest>
+     * @var Collection<int, ReplyToContactRequest>
      */
-    #[ORM\OneToMany(targetEntity: ReplyToConatctRequest::class, mappedBy: 'Contact')]
-    private Collection $replyToConatctRequests;
+    #[ORM\OneToMany(targetEntity: ReplyToContactRequest::class, mappedBy: 'Contact')]
+    private Collection $replyToContactRequests;
 
     public function __construct()
     {
-        $this->replyToConatctRequests = new ArrayCollection();
+        $this->replyToContactRequests = new ArrayCollection();
     }
 
   
@@ -119,29 +119,29 @@ class Contact
     }
 
     /**
-     * @return Collection<int, ReplyToConatctRequest>
+     * @return Collection<int, ReplyToContactRequest>
      */
-    public function getReplyToConatctRequests(): Collection
+    public function getReplyToContactRequests(): Collection
     {
-        return $this->replyToConatctRequests;
+        return $this->replyToContactRequests;
     }
 
-    public function addReplyToConatctRequest(ReplyToConatctRequest $replyToConatctRequest): static
+    public function addReplyToContactRequest(ReplyToContactRequest $replyToContactRequest): static
     {
-        if (!$this->replyToConatctRequests->contains($replyToConatctRequest)) {
-            $this->replyToConatctRequests->add($replyToConatctRequest);
-            $replyToConatctRequest->setContact($this);
+        if (!$this->replyToContactRequests->contains($replyToContactRequest)) {
+            $this->replyToContactRequests->add($replyToContactRequest);
+            $replyToContactRequest->setContact($this);
         }
 
         return $this;
     }
 
-    public function removeReplyToConatctRequest(ReplyToConatctRequest $replyToConatctRequest): static
+    public function removeReplyToContactRequest(ReplyToContactRequest $replyToContactRequest): static
     {
-        if ($this->replyToConatctRequests->removeElement($replyToConatctRequest)) {
+        if ($this->replyToContactRequests->removeElement($replyToContactRequest)) {
             // set the owning side to null (unless already changed)
-            if ($replyToConatctRequest->getContact() === $this) {
-                $replyToConatctRequest->setContact(null);
+            if ($replyToContactRequest->getContact() === $this) {
+                $replyToContactRequest->setContact(null);
             }
         }
 

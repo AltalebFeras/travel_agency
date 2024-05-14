@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ReplyToContactRequest{% endblock %}
+
+{% block body %}
+    <h1>ReplyToContactRequest</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ reply_to_contact_request.id }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ reply_to_contact_request.content }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-secondary"  href="{{ path('app_reply_to_contact_request_index') }}">back to list</a>
+
+
+{% endblock %}

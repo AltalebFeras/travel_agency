@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\ReplyToConatctRequest;
+use App\Entity\ReplyToContactRequest;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<ReplyToConatctRequest>
+ * @extends ServiceEntityRepository<ReplyToContactRequest>
  */
-class ReplyToConatctRequestRepository extends ServiceEntityRepository
+class ReplyToContactRequestRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ReplyToConatctRequest::class);
+        parent::__construct($registry, ReplyToContactRequest::class);
     }
 
 //    /**
-//     * @return ReplyToConatctRequest[] Returns an array of ReplyToConatctRequest objects
+//     * @return ReplyToContactRequest[] Returns an array of ReplyToContactRequest objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -31,7 +31,7 @@ class ReplyToConatctRequestRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?ReplyToConatctRequest
+//    public function findOneBySomeField($value): ?ReplyToContactRequest
 //    {
 //        return $this->createQueryBuilder('r')
 //            ->andWhere('r.exampleField = :val')

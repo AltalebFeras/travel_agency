@@ -1,0 +1,9 @@
+.imageThisTrip {
+    width: 55%;
+  max-width: 650px;
+  max-height: 650px;
+  border-radius: 33px;
+}
+.descriptionTrip {
+  max-width: 555px;
+}

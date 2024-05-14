@@ -64,9 +64,8 @@ function TripDetail(props) {
        city={trip.Destination.city}
        Category={trip.Category}
        image={trip.Destination.image}
-       
-       />
-        <RegistrationForm tripId={trip.id} />
+       tripId={trip.id}
+         />
       </div>
     </>
   );

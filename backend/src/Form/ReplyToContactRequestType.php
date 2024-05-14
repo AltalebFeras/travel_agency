@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\ReplyToConatctRequest;
+use App\Entity\ReplyToContactRequest;
 use App\Entity\Contact;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -12,7 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class ReplyToConatctRequestType extends AbstractType
+class ReplyToContactRequestType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -39,7 +39,7 @@ class ReplyToConatctRequestType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => ReplyToConatctRequest::class,
+            'data_class' => ReplyToContactRequest::class,
         ]);
     }
 }
