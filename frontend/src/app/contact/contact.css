@@ -1,0 +1,14 @@
+.introImage {
+  width: 100%;
+}
+.introTextContact {
+  font-size: 24px;
+  color: rgb(255, 255, 255);
+  font-family: "Comic Sans MS", Chiller, Papyrus;
+}
+.introContact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}

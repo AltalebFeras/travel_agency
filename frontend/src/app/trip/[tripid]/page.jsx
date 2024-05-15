@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import "./page.css";
 import RegistrationForm from "@/app/components/registrationForm/RegistrationForm";
 import TripStyle from "../tripeStyle/TripStyle";
+import Footer from "@/app/components/footer/Footer";
 
 function formatDate(dateString) {
   const options = {
@@ -67,6 +68,8 @@ function TripDetail(props) {
        tripId={trip.id}
          />
       </div>
+      <Footer/>
+
     </>
   );
 }
