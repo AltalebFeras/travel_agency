@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/navbar/Navbar';
 import TripsList from '../components/tripsList/TripsList';
-import Filter from '../components/filter/Filter'; // Updated import
+import Filter from '../components/filter/Filter';  
 import "./page.css";
 import Footer from '../components/footer/Footer';
 import RandomTrips from '../components/randomTrips/RandomTrips';
@@ -15,8 +15,7 @@ export default function FetchTripsRandom() {
   const [startDateFilter, setStartDateFilter] = useState("");
   const [endDateFilter, setEndDateFilter] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-//   const [countries, setCountries] = useState([]);
-//   const [categories, setCategories] = useState([]);
+ 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,27 +23,18 @@ export default function FetchTripsRandom() {
         const response = await fetch('https://127.0.0.1:8000/api/trips/');
         const data = await response.json();
         setTrips(data);
-        setLoading(false); // Set loading to false after data is fetched
-        // extractFilterOptions(data); // Extract countries and categories from trips data
+        setLoading(false); 
+        
       } catch (error) {
         console.error('Error fetching data:', error);
-        setLoading(false); // Set loading to false in case of error
+        setLoading(false); 
       }
     };
 
     fetchData();
   }, []);
 
-//   // Function to extract unique countries and categories from trips data
-//   const extractFilterOptions = (trips) => {
-//     const uniqueCountries = [...new Set(trips.map(trip => trip.Destination.country))];
-//     setCountries(uniqueCountries);
-    
-//     const uniqueCategories = [...new Set(trips.flatMap(trip => trip.Category.map(category => category.name)))];
-//     setCategories(uniqueCategories);
-//   };
 
-  // Function to filter trips based on the selected filters
   const filterTrips = (trip) => {
     if (countryFilter && trip.Destination.country !== countryFilter) return false;
     if (categoryFilter && !trip.Category.some(category => category.name === categoryFilter)) return false;
@@ -54,7 +44,6 @@ export default function FetchTripsRandom() {
     return true;
   };
 
-  // Filtered trips based on selected filters
   const filteredTrips = trips.filter(filterTrips);
 
   return (

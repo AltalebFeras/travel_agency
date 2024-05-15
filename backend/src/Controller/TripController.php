@@ -23,7 +23,6 @@ class TripController extends AbstractController
     {
         $trip = new Trip();
 
-        // Set the currently logged-in user as the owner of the trip
         $trip->setUser($user);
 
         $form = $this->createForm(TripType::class, $trip);
@@ -61,9 +60,7 @@ class TripController extends AbstractController
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Trip $trip, EntityManagerInterface $entityManager, UserInterface $user): Response
     {
-        // Check if the user is an editor and not an admin
         if ($this->isGranted('ROLE_EDITOR') && !$this->isGranted('ROLE_ADMIN')) {
-            // Check if the trip does not belong to the current user
             if ($trip->getUser() !== $user) {
                 $this->addFlash('error', 'You are not allowed to edit this trip.');
                 return $this->redirectToRoute('app_trip_index');
@@ -88,9 +85,7 @@ class TripController extends AbstractController
     #[Route('/{id}', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, Trip $trip, EntityManagerInterface $entityManager, UserInterface $user): Response
     {
-        // Check if the user is an editor and not an admin
         if ($this->isGranted('ROLE_EDITOR') && !$this->isGranted('ROLE_ADMIN')) {
-            // Check if the trip does not belong to the current user
             if ($trip->getUser() !== $user) {
                 $this->addFlash('error', 'You are not allowed to delete this trip.');
                 return $this->redirectToRoute('app_trip_index');

@@ -1,19 +1,18 @@
-import { useState, useEffect } from "react"; // Import useState and useEffect hooks
+import { useState, useEffect } from "react";  
 
 export default function IntroImage() {
-  const [activeIndex, setActiveIndex] = useState(0); // State to track active slide index
+  const [activeIndex, setActiveIndex] = useState(0);  
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      // Increment activeIndex to switch to the next slide
       setActiveIndex((prevIndex) => (prevIndex === 4 ? 0 : prevIndex + 1));
-    }, 2100); // Change slide every 3 seconds
+    }, 2100);  
 
-    return () => clearInterval(intervalId); // Clean up the interval when component unmounts
-  }, []); // Run this effect only once when component mounts
+    return () => clearInterval(intervalId);  
+  }, []);  
 
   const handleIndicatorClick = (index) => {
-    setActiveIndex(index); // Change activeIndex when indicator clicked
+    setActiveIndex(index);  
   };
 
   return (
@@ -43,7 +42,6 @@ export default function IntroImage() {
 }
 
 function getImageURL(index) {
-  // Return the appropriate image URL based on the index
   switch (index) {
     case 0:
       return "kGbfHqF/Northern-Lights-Scandinavia-Norway.jpg";
@@ -56,6 +54,6 @@ function getImageURL(index) {
     case 4:
       return "D5JBXvW/Piotr-chrobot.jpg";
     default:
-      return ""; // Handle default case if needed
+      return ""; 
   }
 }

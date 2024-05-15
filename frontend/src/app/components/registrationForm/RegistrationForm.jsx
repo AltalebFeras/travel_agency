@@ -26,7 +26,6 @@ export default function RegistrationForm({ tripId }) {
             ...prevState,
             [name]: value
         }));
-        // Clear error when user starts typing
         setErrors(prevErrors => ({
             ...prevErrors,
             [name]: ''
@@ -36,7 +35,6 @@ export default function RegistrationForm({ tripId }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Verification
         let newErrors = {};
 
         if (formData.firstName.length < 3) {
@@ -52,7 +50,7 @@ export default function RegistrationForm({ tripId }) {
             newErrors.email = 'Invalid email address.';
         }
 
-        const telephoneRegex = /^\d{10}$/; // Assuming 10 digits for telephone
+        const telephoneRegex = /^\d{10}$/;  
         if (!telephoneRegex.test(formData.telephone)) {
             newErrors.telephone = 'Invalid telephone number.';
         }
@@ -62,18 +60,16 @@ export default function RegistrationForm({ tripId }) {
             return;
         }
 
-        // Prepare data for backend
         const requestData = {
             trip: {
                 id: tripId
             },
             status: {
-                id: 1 // Assuming this is the status ID required by the backend
+                id: 1  
             },
             ...formData
         };
 
-        // Submit data to API
         try {
             const response = await fetch('https://127.0.0.1:8000/api/reservation/new', {
                 method: 'POST',

@@ -33,8 +33,7 @@
   background-color: #6A2C70;
   color: #070202;
   display: flex;
-  /* align-items: center; */
-  /* border: 3px solid #3f702c; */
+ 
   border-radius: 10px;
   justify-content: center;
   font-size: 1.5em;
@@ -47,7 +46,6 @@
   font-weight: bolder;
   display: flex;
   align-items: center;
-  /* border: 10px solid #F08A5D; */
   border-radius: 10px;
   justify-content: center;
   font-size: 1.5em;

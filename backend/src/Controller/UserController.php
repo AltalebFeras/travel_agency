@@ -33,7 +33,6 @@ class UserController extends AbstractController
     public function new(Request $request,  EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher): Response
     {
 
-        // Check if the logged-in user is an editor and if they are trying to edit their own account
         if ($this->isGranted('ROLE_EDITOR') && !$this->isGranted('ROLE_ADMIN') ) {
             $this->addFlash('errorUser', 'You are not allowed to create users ONLY ADMINS.');
             return $this->redirectToRoute('app_user_index');
@@ -46,7 +45,6 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('password')->getData()) {
-                // encode the plain password
                 $user->setPassword(
                     $userPasswordHasher->hashPassword(
                         $user,
@@ -79,7 +77,6 @@ class UserController extends AbstractController
     {
         $currentUser = $this->getUser();
 
-        // Check if the logged-in user is an editor and if they are trying to edit their own account
         if ($this->isGranted('ROLE_EDITOR') && !$this->isGranted('ROLE_ADMIN') && $currentUser !== $user) {
             $this->addFlash('errorUser', 'You are not allowed to edit this user.');
             return $this->redirectToRoute('app_user_index');
@@ -91,7 +88,6 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('password')->getData()) {
-                // encode the plain password
                 $user->setPassword(
                     $userPasswordHasher->hashPassword(
                         $user,
@@ -124,7 +120,6 @@ class UserController extends AbstractController
         {
             $currentUser = $this->getUser();
 
-            // Check if the logged-in user is an editor and if they are trying to edit their own account
             if ($this->isGranted('ROLE_EDITOR') && !$this->isGranted('ROLE_ADMIN') && $currentUser !== $user) {
                 $this->addFlash('errorUser', 'You are not allowed to delete this user.');
                 return $this->redirectToRoute('app_user_index');

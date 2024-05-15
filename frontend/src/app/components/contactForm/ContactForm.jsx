@@ -26,7 +26,6 @@ export default function ContactForm({ tripId }) {
             ...prevState,
             [name]: value
         }));
-        // Clear error when user starts typing
         setErrors(prevErrors => ({
             ...prevErrors,
             [name]: ''
@@ -36,7 +35,6 @@ export default function ContactForm({ tripId }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Verification
         let newErrors = {};
 
         if (formData.firstName.length < 3) {
@@ -52,23 +50,20 @@ export default function ContactForm({ tripId }) {
             newErrors.email = 'Invalid email address.';
         }
 
-        // No need to validate message length, as it's not specified in the backend entity
 
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
             return;
         }
 
-        // Prepare data for backend
         const requestData = {
             firstName: formData.firstName,
             lastName: formData.lastName,
             email: formData.email,
             message: formData.message,
-            status: { id: 1 } // Assuming this is the status ID required by the backend
+            status: { id: 1 }  
         };
 
-        // Submit data to API
         try {
             const response = await fetch('https://127.0.0.1:8000/api/contact/new', {
                 method: 'POST',

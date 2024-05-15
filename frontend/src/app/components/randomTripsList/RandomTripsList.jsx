@@ -6,7 +6,6 @@ import RandomTripCardTeaser from "../randomTripCardTeaser/RandomTripCardTeaser";
 export default function RandomTripsList(props) {
   const { trips, countryFilter, categoryFilter, dateFilter } = props;
 
-  // Filter trips based on the provided filters
   const filteredTrips = trips.filter(trip => {
     if (countryFilter && trip.Destination.country !== countryFilter) return false;
     if (categoryFilter && !trip.Category.some(category => category.name === categoryFilter)) return false;

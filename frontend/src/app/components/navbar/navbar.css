@@ -4,11 +4,7 @@
     align-items: baseline;
     flex-wrap: wrap;
     padding: 10px 20px;
-
-    /* .NavLinks{
-        
-    } */
-
+ 
     .navigation {
         display: flex;
         gap: 30px;

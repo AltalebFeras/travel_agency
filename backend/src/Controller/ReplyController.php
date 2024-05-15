@@ -18,7 +18,6 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[Route('/reply', name: 'app_reply_')]
 class ReplyController extends AbstractController
 {
-    // Inject MailerInterface into the controller
     public function __construct(private MailerInterface $mailer)
     {
     }
@@ -42,7 +41,6 @@ class ReplyController extends AbstractController
             $entityManager->persist($reply);
             $entityManager->flush();
       
-            // Send email notification
             $this->sendReplyNotificationEmail($reply);
 
             return $this->redirectToRoute('app_reply_index', [], Response::HTTP_SEE_OTHER);
@@ -54,7 +52,6 @@ class ReplyController extends AbstractController
         ]);
     }
 
-    // Function to send email notification
     private function sendReplyNotificationEmail(Reply $reply): void
     {
         $reservation = $reply->getReservation();
