@@ -5,11 +5,9 @@
     flex-wrap: wrap;
     padding: 10px 20px;
 
-    .logo {
-        margin: 0;
-        font-size: 32px;
-        font-weight: bold;
-    }
+    /* .NavLinks{
+        
+    } */
 
     .navigation {
         display: flex;

@@ -25,7 +25,7 @@ export default function FetchTripsRandom() {
         const data = await response.json();
         setTrips(data);
         setLoading(false); // Set loading to false after data is fetched
-        extractFilterOptions(data); // Extract countries and categories from trips data
+        // extractFilterOptions(data); // Extract countries and categories from trips data
       } catch (error) {
         console.error('Error fetching data:', error);
         setLoading(false); // Set loading to false in case of error
