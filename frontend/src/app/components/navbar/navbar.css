@@ -2,14 +2,33 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     padding: 10px 20px;
  
-    .navigation {
+   
+}
+.navigation {
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.logoImg{
+    width: 100%;
+}
+.containerFluid{
+    display: flex;
+    flex-direction: column;
+}
+
+
+@media (max-width: 570px) {
+    .logoImg {
+        display: none;
+    }
+    .bg-body-tertiary{
         display: flex;
-        gap: 30px;
-        margin: 0;
-        padding: 0;
-        list-style: none;
+        justify-content: center;
     }
 }
