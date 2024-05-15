@@ -18,7 +18,7 @@
   .filter-container input[type="date"],
   .filter-container input[type="text"] {
     padding: 5px;
-    margin-right: 10px;
+    /* margin-right: 10px; */
     border: 1px solid #ccc;
     border-radius: 4px;
   }
@@ -31,7 +31,7 @@
     position: relative;
   }
   
-  .border {
+  .bordera {
     background-image: linear-gradient(to right bottom, #e300ff, #ff00aa, #ff5956, #ffb900, #fffe00);
     box-shadow: -25px -10px 30px -5px rgba(225, 0, 255, 0.5),
       25px -10px 30px -5px rgba(255, 0, 212, 0.5),
@@ -40,7 +40,7 @@
     padding: 4px;
   }
   
-  .inputSearch {
+  /* .inputSearch {
     background-color: #212121;
     max-width: 250px;
     height: 40px;
@@ -51,7 +51,7 @@
     color: white;
     outline: 0;
     overflow: hidden;
-  }
+  } */
   
   .box-inputSearch::after,
   .box-inputSearch::before {
