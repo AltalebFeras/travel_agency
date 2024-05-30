@@ -10,6 +10,8 @@ git clone https://github.com/AltalebFeras/travel_agency.git
 
 ## Front-end (Next.js)
 
+https://feras-travel-agency.netlify.app/
+
 The front-end of the application is developed with Next.js.
 For more information on installation, usage, and features of the front-end, please refer to the dedicated README:
 
@@ -17,7 +19,16 @@ For more information on installation, usage, and features of the front-end, plea
 
 ## Back-end (Symfony)
 
+
+
 The back-end of the application is developed with Symfony.
 For more information on installation, usage, and features of the back-end, please refer to the dedicated README:
+
+https://www.myprojects-simplon.online/trips
+
+just for a test as  editor you can use this info to log in :
+
+## email : guests@mail.com
+## password : guests@mail.com
 
 [README Back-end](backend/ReadmeBack.md)
