@@ -1,12 +1,12 @@
 <?php
-
+// src/Form/ReplyType.php
 namespace App\Form;
 
 use App\Entity\Reply;
 use App\Entity\Reservation;
+use App\Form\Type\TinyMCEType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
@@ -17,7 +17,7 @@ class ReplyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('content', TextareaType::class, [
+            ->add('content', TinyMCEType::class, [
                 'constraints' => [
                     new NotBlank(['message' => 'Please enter a description for the trip']),
                     new Length([
@@ -26,7 +26,6 @@ class ReplyType extends AbstractType
                     ])
                 ]
             ])
-          
             ->add('Reservation', EntityType::class, [
                 'class' => Reservation::class,
                 'label' => 'Choose a reservation:',
